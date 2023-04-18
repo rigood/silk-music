@@ -91,6 +91,14 @@ nav {
       opacity: 1;
     }
 
+    &.active {
+      opacity: 1;
+      color: $primary;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
     a {
       display: flex;
       align-items: center;

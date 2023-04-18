@@ -12,7 +12,7 @@ nav
                 a(href="/user/logout") 로그아웃
         else
             .user-avatar
-                img(src="/public/client/img/defaultAvatar.png")
+                img(src="/public/client/img/defaultAvatar.jpg")
             .user-nickname Guest
             .user-menu
                 a(href="/login") 로그인
@@ -20,38 +20,38 @@ nav
 
     .label MENU
     ul
-        li
+        li(class=`${pathName==="/"&&"active"}`)
             a(href="/")
                 i.fa.fa-home
                 span 홈
-        li
+        li(class=`${pathName==="/chart"&&"active"}`)
             a(href="/chart")
                 i.fa.fa-chart-simple
                 span 인기 차트
-        li
+        li(class=`${pathName==="/search"&&"active"}`)
             a(href="/search")
                 i.fa.fa-magnifying-glass
                 span 검색
 
     .label PLAYLIST
     ul
-        li
+        li(class=`${pathName==="/playlist/like"&&"active"}`)
             a(href="/playlist/like")
                 i.far.fa-heart
                 span 좋아요 누른 곡
-        li        
+        li(class=`${pathName==="/playlist/my"&&"active"}`)        
             a(href="/playlist/my")                
                 i.fa.fa-headphones
                 span 내 플레이리스트
 
     .label EVENT
     ul
-        li
+        li(class=`${pathName==="/rank"&&"active"}`)
             a(href="/rank")
                 i.fa.fa-medal
                 span 스트리밍 랭킹
 
-        li
+        li(class=`${pathName===`/user/${loggedInUser._id}/points`&&"active"}`)
             a(href="/user/:id/points")
                 i.fa.fa-coins
                 span 내 포인트
