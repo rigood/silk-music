@@ -3,6 +3,7 @@
 @import "./config/_variables.scss";
 
 // Components
+@import "./components/nav.scss";
 
 // Mixins
 
@@ -34,6 +35,8 @@
 body {
   font-family: "Pretendard-Regular";
   font-size: 16px;
+  color: $text;
+
   background-color: $bg;
 
   &.scrollHide {

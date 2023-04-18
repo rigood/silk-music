@@ -1,0 +1,58 @@
+nav
+    a(href="/")
+        h1.logo Silk Music
+
+    .user
+        if loggedIn
+            a.user-avatar(href=`/user/${loggedInUser._id}`)
+                img(src=loggedInUser.avatarUrl)
+            a.user-nickname(href=`/user/${loggedInUser._id}`)=loggedInUser.name
+            .user-menu
+                a(href="/user/edit") 프로필 수정
+                a(href="/user/logout") 로그아웃
+        else
+            .user-avatar
+                img(src="/public/client/img/defaultAvatar.png")
+            .user-nickname Guest
+            .user-menu
+                a(href="/login") 로그인
+                a(href="/join") 회원가입
+
+    .label MENU
+    ul
+        li
+            a(href="/")
+                i.fa.fa-home
+                span 홈
+        li
+            a(href="/chart")
+                i.fa.fa-chart-simple
+                span 인기 차트
+        li
+            a(href="/search")
+                i.fa.fa-magnifying-glass
+                span 검색
+
+    .label PLAYLIST
+    ul
+        li
+            a(href="/playlist/like")
+                i.far.fa-heart
+                span 좋아요 누른 곡
+        li        
+            a(href="/playlist/my")                
+                i.fa.fa-headphones
+                span 내 플레이리스트
+
+    .label EVENT
+    ul
+        li
+            a(href="/rank")
+                i.fa.fa-medal
+                span 스트리밍 랭킹
+
+        li
+            a(href="/user/:id/points")
+                i.fa.fa-coins
+                span 내 포인트
+
