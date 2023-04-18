@@ -7,6 +7,7 @@ import { localsMiddleware } from "./middlewares";
 
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
+import playlistRouter from "./routers/playlistRouter";
 import apiRouter from "./routers/apiRouter";
 
 const app = express();
@@ -39,6 +40,7 @@ app.use("/public", express.static("src"));
 
 app.use("/", rootRouter);
 app.use("/user", userRouter);
+app.use("/playlist", playlistRouter);
 app.use("/api", apiRouter);
 
 export default app;
