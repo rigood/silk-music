@@ -1,0 +1,36 @@
+#player
+    #controller
+        .info-area
+            img#cover(src="/public/client/img/darkDefaultSongCover.png")
+            .info
+                span#title
+                span#artist
+        .control-area
+            i.fa.fa-random#randomBtn(title="랜덤 재생 설정" data-random="off")
+            i.fa.fa-step-backward#prevBtn(title="이전 곡 재생")
+            i.fa.fa-play#playBtn(title="재생/일시정지 선택")
+            i.fa.fa-step-forward#nextBtn(title="다음 곡 재생")
+            i.fa.fa-repeat#repeatBtn(title="반복 재생 설정" data-repeat="off")
+        .time-area
+            span#currentTime 00:00
+            span  / 
+            span#duration 00:00
+        .progress-area
+            #progressBar
+            #timeTooltip
+        .volume-area
+            i.fa.fa-volume-high#volumeBtn
+            #volumeBar-area
+                #volumeBarTotal
+                    #volumeBar
+        .toggle-area
+            span#bar1
+            span#bar2
+            span#bar3
+    #screen
+        .youtube-area
+            #youtubeWrapper
+                #youtubeIframe
+        .playlist-area
+            h2#label 최근 들은 곡
+            ul#playlist

@@ -1,0 +1,267 @@
+#player {
+  background-color: $playerBg;
+
+  #controller {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9997;
+
+    height: 80px;
+    background-color: $playerBg;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 20px;
+
+    .info-area {
+      display: flex;
+
+      img {
+        margin-right: 10px;
+
+        display: block;
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 7.5px;
+
+        #title {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        #artist {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .control-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 20px;
+
+      i {
+        cursor: pointer;
+      }
+
+      #playBtn {
+        font-size: 30px;
+      }
+
+      #randomBtn,
+      #repeatBtn {
+        color: gray;
+      }
+    }
+
+    .time-area {
+      span {
+        font-size: 12px;
+      }
+    }
+
+    .progress-area {
+      position: absolute;
+      top: -3px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background-color: gray;
+      cursor: pointer;
+
+      #progressBar {
+        width: 0%;
+        height: 100%;
+        background-color: $primary;
+      }
+
+      #timeTooltip {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+
+        padding: 3px 6px;
+        border-radius: 2px;
+        background-color: white;
+        font-size: 12px;
+      }
+    }
+
+    .volume-area {
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+      cursor: pointer;
+
+      i {
+        padding: 5px;
+      }
+
+      #volumeBar-area {
+        padding: 10px 0;
+
+        #volumeBarTotal {
+          width: 100px;
+          height: 3px;
+          background-color: gray;
+
+          #volumeBar {
+            width: 0%;
+            height: 100%;
+            background-color: $primary;
+          }
+        }
+      }
+    }
+
+    .toggle-area {
+      width: 20px;
+      height: 14px;
+      position: relative;
+      cursor: pointer;
+
+      span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        border-radius: 1px;
+        background-color: $playerBg;
+        transition: all 0.2s;
+
+        &:nth-child(1) {
+          top: 0;
+        }
+        &:nth-child(2) {
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &:nth-child(3) {
+          bottom: 0;
+        }
+
+        &:nth-child(1).show {
+          top: 50%;
+          transform: translateY(-50%) rotate(45deg);
+        }
+        &:nth-child(2).show {
+          opacity: 0;
+        }
+        &:nth-child(3).show {
+          bottom: 50%;
+          transform: translateY(50%) rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  #screen {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    z-index: 9996;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    transition: 0.3s all ease-in-out;
+
+    height: 100%;
+    padding-top: 80px;
+
+    display: flex;
+    background-color: $playerBg;
+
+    &.show {
+      visibility: visible;
+      opacity: 1;
+      transform: translateZ(0);
+    }
+
+    .youtube-area {
+      flex: 3;
+      background-color: $playerBg;
+
+      #youtubeWrapper {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+        overflow: hidden;
+
+        #youtubeIframe {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+
+    .playlist-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: $playerBg;
+
+      #label {
+        padding: 15px;
+      }
+
+      #playlist {
+        overflow-y: auto;
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 10px 20px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $playerBgHover;
+          }
+
+          &.nowPlaying {
+            background-color: $primary;
+            &:hover {
+              background-color: $primary;
+            }
+          }
+
+          img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 15px;
+          }
+
+          .info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+          }
+
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
