@@ -1,0 +1,18 @@
+mixin miniSongWithAdd(song)
+    li.mini-song(data-id=song.song._id)
+        .cover.play-btn
+            img(src=song.song.coverUrl)
+            .overlay
+                i.fa.fa-play
+        .info
+            span.title=song.song.title
+            span.artist-album=song.song.artist+" · "+song.song.album
+        .play.play-btn
+            i.fa.fa-play
+        .like
+            if song.isLiked
+                i.fa.fa-heart.isLiked
+            else
+                i.far.fa-heart
+        .add
+            i.fa.fa-plus

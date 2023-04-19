@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema({
     },
   },
   avatarUrl: { type: String, required: true },
-  createdAt: { type: Date, required: true, default: Date.now },
   points: { type: Number, default: 0 },
+  createdAt: { type: Date, required: true, default: Date.now },
   playlists: [{ type: mongoose.Schema.Types.ObjectId, ref: "Playlist" }],
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
 });

@@ -1,1 +1,22 @@
 //- playlist 받음
+
+extends ../base
+include ../mixins/songWithRemove
+
+block content
+    .left
+        .playlist-page
+            .left-col
+                img(src=playlist.coverUrl)
+            .right-col
+                .name=playlist.name
+                .user="made by " + playlist.user.name
+                if playlist.songs.length !== 0
+                    button(data-id=playlist._id).play-all
+                        i.fa.fa-play
+                        span=playlist.songs.length+"곡 전체 재생"
+        ul
+            each song, index in playlist.songs
+                +songWithRemove(song, index, playlist._id, playlist.user._id)
+            else
+                .msg="플레이리스트에 담긴 곡이 없습니다."

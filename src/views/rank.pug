@@ -1,0 +1,12 @@
+extends base
+include mixins/member
+
+block content
+    .left
+        h2 스트리밍 랭킹
+        .desc
+            div * 가수 진욱 님의 노래 1회 재생 시 포인트 1점 획득
+            div * 동점일 경우, 가입일이 최근일수록 높은 순위 부여
+        ul
+            each member, index in members
+                +member(member, index)

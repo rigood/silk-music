@@ -1,2 +1,28 @@
 //- avatarUrl, name, oldPw, newPw
 //- errorMsg (401 비밀번호 불일치, 409 기존 비번 새 비번 일치, 500 서버 오류)
+
+extends ../base
+include ../mixins/radio
+
+block content
+    .center
+        h2 프로필 수정
+
+        form(method="POST")
+            .label 프로필 사진
+            .radio
+                each avatar in ["defaultAvatar","sarang","seoul","crown","red","yellowgreen"]
+                    +radio(avatar, loggedInUser.avatarUrl, "avatarUrl")
+            .label 닉네임
+            input(name="name" id="name" placeholder="닉네임 (선택)" value=loggedInUser.name type="text" minLength="1" maxLength="10")
+            button(type="submit") 수정하기
+
+        form(method="POST" action="/user/change-pw")
+            .label 기존 비밀번호
+            input(name="oldPw" id="oldPw" placeholder="기존 비밀번호" type="password", required, minLength="4" maxLength="15" autocomplete="new-password")
+            .label 새 비밀번호
+            input(name="newPw" id="newPw" placeholder="새 비밀번호" type="password", required, minLength="4" maxLength="15" autocomplete="new-password")
+            button(type="submit") 변경하기
+
+        if errorMsg
+            .errorMsg=errorMsg

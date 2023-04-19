@@ -1,1 +1,11 @@
 //- songs 받음
+
+extends base
+include mixins/songWithAdd
+
+block content
+    .left
+        h2 인기 차트
+        ul
+            each song, index in songs
+                +songWithAdd(song, index)

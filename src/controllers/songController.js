@@ -7,24 +7,49 @@ export const home = async (req, res) => {
   // 인기음악 (조회수 기준 정렬)
   const popularSongs = await Song.find({ artist: "진욱" })
     .sort({ views: "desc" })
-    .limit(5);
+    .limit(5)
+    .populate("likes");
 
   // 최신음악 (발매일, 조회수 기준 정렬)
   const latestSongs = await Song.find({})
     .sort({ releasedAt: "desc", views: "asc" })
-    .limit(9);
+    .limit(9)
+    .populate("likes");
 
   // 로그인 되어있으면, 좋아요 여부 표시하여 최신음악 반환
   const userId = req.session?.user?._id;
-  let latestSongsWithLike;
+
+  let popularSongsWithLike = popularSongs;
   if (userId) {
-    latestSongsWithLike = latestSongs.map((song) => ({
-      ...song,
+    popularSongsWithLike = popularSongs.map((song) => ({
+      song,
       isLiked:
-        song.likes?.filter((like) => like.user.toString() === userId).length ===
-        1
+        song.likes?.filter((like) => String(like?.user?._id) === String(userId))
+          .length === 1
           ? true
           : false,
+    }));
+  } else {
+    popularSongsWithLike = popularSongs.map((song) => ({
+      song,
+      isLiked: false,
+    }));
+  }
+
+  let latestSongsWithLike = latestSongs;
+  if (userId) {
+    latestSongsWithLike = latestSongs.map((song) => ({
+      song,
+      isLiked:
+        song.likes?.filter((like) => String(like?.user?._id) === String(userId))
+          .length === 1
+          ? true
+          : false,
+    }));
+  } else {
+    latestSongsWithLike = latestSongs.map((song) => ({
+      song,
+      isLiked: false,
     }));
   }
 
@@ -33,17 +58,42 @@ export const home = async (req, res) => {
 
   return res.render("home", {
     pageTitle: "홈",
-    popularSongs,
-    latestSongs: userId ? latestSongsWithLike : latestSongs,
+    popularSongs: popularSongsWithLike,
+    latestSongs: latestSongsWithLike,
     recommendedPlaylists,
   });
 };
 
 export const chart = async (req, res) => {
   // 조회수, 발매일 기준 정렬 후 노래 목록 반환
-  const songs = await Song.find({}).sort({ view: "desc", releasedAt: "desc" });
+  const songs = await Song.find({})
+    .sort({ views: "desc", releasedAt: "desc" })
+    .populate("likes");
 
-  return res.render("chart", { pageTitle: "인기 차트", songs });
+  // 로그인 되어있으면, 좋아요 여부 표시하여 노래 목록 반환
+  const userId = req.session?.user?._id;
+
+  let songsWithLike = songs;
+  if (userId) {
+    songsWithLike = songs.map((song) => ({
+      song,
+      isLiked:
+        song.likes?.filter((like) => String(like?.user?._id) === String(userId))
+          .length === 1
+          ? true
+          : false,
+    }));
+  } else {
+    songsWithLike = songs.map((song) => ({
+      song,
+      isLiked: false,
+    }));
+  }
+
+  return res.render("chart", {
+    pageTitle: "인기 차트",
+    songs: songsWithLike,
+  });
 };
 
 export const getSearch = (req, res) => {
@@ -73,15 +123,35 @@ export const postSearch = async (req, res) => {
         },
       },
     ],
-  });
+  }).populate("likes");
 
   // 검색된 곡 개수
   const count = songs.length;
 
+  // 로그인 , 좋아요 여부 표시하여 노래 목록 반환
+  const userId = req.session?.user?._id;
+
+  let songsWithLike = songs;
+  if (userId) {
+    songsWithLike = songs.map((song) => ({
+      song,
+      isLiked:
+        song.likes?.filter((like) => String(like?.user?._id) === userId)
+          .length === 1
+          ? true
+          : false,
+    }));
+  } else {
+    songsWithLike = songs.map((song) => ({
+      song,
+      isLiked: false,
+    }));
+  }
+
   return res.render("search", {
     pageTitle: "검색 결과",
     keyword,
-    songs,
+    songs: songsWithLike,
     count,
   });
 };
@@ -100,11 +170,16 @@ export const getSong = async (req, res) => {
 };
 
 export const toggleSongLike = async (req, res) => {
+  // 유저 확인
+  if (!req.session.user) {
+    return res.json({ ok: false, errorMsg: "로그인 후 이용해주세요." });
+  }
+
   const {
     session: {
       user: { _id: userId },
     },
-    params: { id: songId },
+    params: { songId },
   } = req;
 
   const song = await Song.findById(songId);
@@ -130,18 +205,18 @@ export const toggleSongLike = async (req, res) => {
       song: songId,
     });
 
-    song.likes.push(like._id);
+    await song.likes.push(like._id);
     await song.save();
-    user.likes.push(like._id);
+    await user.likes.push(like._id);
     await user.save();
 
     // 좋아요 삭제
   } else {
     await Like.findOneAndDelete({ $and: [{ song: songId }, { user: userId }] });
 
-    song.likes.splice(song.likes.indexOf(like._id), 1);
+    await song.likes.splice(song.likes.indexOf(like._id), 1);
     await song.save();
-    user.likes.splice(user.likes.indexOf(like._id), 1);
+    await user.likes.splice(user.likes.indexOf(like._id), 1);
     await user.save();
     like = null;
   }
@@ -155,4 +230,86 @@ export const toggleSongLike = async (req, res) => {
     like: like ? true : false,
     count,
   });
+};
+
+export const registerView = async (req, res) => {
+  const { youtubeId } = req.params;
+
+  const song = await Song.findOne({ youtubeId });
+
+  if (!song) {
+    return res.sendStatus(404).json({ ok: false });
+  }
+
+  song.views += 1;
+  await song.save();
+
+  return res.status(200).json({ ok: true, views: song.views });
+};
+
+export const getPoint = async (req, res) => {
+  // 유저 확인
+  if (!req.session.user) {
+    return res.json({ ok: false });
+  }
+
+  const {
+    session: {
+      user: { _id: userId },
+    },
+    params: { youtubeId },
+  } = req;
+
+  const user = await User.findById(userId);
+  const song = await Song.findOne({ youtubeId });
+
+  if (!song || !user) {
+    return res.json({ ok: false });
+  }
+
+  const point = song.point;
+
+  if (point === 0) {
+    return res.json({ ok: false });
+  }
+
+  user.points = user.points + point;
+  await user.save();
+
+  return res.status(200).json({ ok: true });
+};
+
+export const getAddSong = async (req, res) => {
+  const pageTitle = "곡 등록";
+
+  return res.render("add-song", { pageTitle });
+};
+
+export const postAddSong = async (req, res) => {
+  const pageTitle = "곡 등록";
+
+  const { youtubeId, title, artist, album, releasedAt, playTime } = req.body;
+
+  const songExists = await Song.findOne({ youtubeId: youtubeId });
+
+  if (songExists) {
+    return res.status(409).render("add-song", {
+      pageTitle,
+      errorMsg: "😂 이미 DB에 등록된 곡입니다.",
+      ok: false,
+    });
+  }
+
+  await Song.create({
+    title,
+    artist,
+    album: album || artist,
+    coverUrl: `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg`,
+    youtubeId,
+    playTime,
+    releasedAt: releasedAt || Date.now(),
+  });
+
+  req.flash("ok", "곡이 정상적으로 등록되었습니다.");
+  return res.redirect("/");
 };

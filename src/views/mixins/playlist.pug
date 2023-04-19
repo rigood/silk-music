@@ -1,0 +1,17 @@
+mixin playlist(isPlaylist, playlist)
+    if isPlaylist
+        li.playlist(data-id=playlist._id)
+            a(href=`/playlist/${playlist._id}`)
+                .cover(style=`background-image: url(${playlist.coverUrl});`)
+                    .overlay
+                        i.fa.fa-play
+            .info
+                .name=playlist.name
+                .count=playlist.songs.length+"곡"
+    else
+        li.playlist
+            a(href="/playlist/create")
+                .cover(style=`background-image: url("/public/client/img/plus.png");`)
+                    .overlay
+            .info
+                .name="새 플레이리스트 추가"

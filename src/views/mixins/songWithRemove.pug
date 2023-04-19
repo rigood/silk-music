@@ -1,0 +1,21 @@
+mixin songWithRemove(song, index, playlistId, playlistUserId)
+    li.song(data-id=song.song._id data-playlist=playlistId)
+        .rank=index+1
+        .cover.play-btn
+            img(src=song.song.coverUrl)
+            .overlay
+                i.fa.fa-play
+        .info
+            span.title=song.song.title
+            span.artist=song.song.artist
+        .album=song.song.album
+        .play.play-btn
+            i.fa.fa-play
+        .like
+            if song.isLiked
+                i.fa.fa-heart.isLiked
+            else
+                i.far.fa-heart
+        if String(loggedInUser._id) === String(playlistUserId)
+            .remove
+                i.fa.fa-trash

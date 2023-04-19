@@ -1,5 +1,6 @@
 import Playlist from "../models/Playlist";
 import User from "../models/User";
+import Song from "../models/Song";
 
 export const my = async (req, res) => {
   const pageTitle = "내 플레이리스트";
@@ -12,7 +13,9 @@ export const my = async (req, res) => {
 
   try {
     // 내 플레이리스트 찾기
-    const playlists = await Playlist.findById(userId).populate("user");
+    const playlists = await Playlist.find({ user: userId })
+      .populate("user")
+      .sort({ createdAt: "desc" });
 
     // 렌더링
     return res.render("playlist/my", { pageTitle, playlists });
@@ -29,19 +32,79 @@ export const my = async (req, res) => {
   }
 };
 
+export const like = async (req, res) => {
+  const pageTitle = "좋아요 누른 곡";
+
+  const {
+    session: {
+      user: { _id: userId },
+    },
+  } = req;
+
+  const user = await User.findById(userId);
+  const likes = user.likes;
+
+  const songs = await Song.find({ likes: { $in: likes } }).populate("likes");
+
+  let songsWithLike = songs.map((song) => ({
+    song,
+    isLiked:
+      song.likes?.filter((like) => String(like?.user?._id) === String(userId))
+        .length === 1
+        ? true
+        : false,
+  }));
+
+  return res.render("playlist/like", { pageTitle, songs: songsWithLike });
+};
+
 export const playlist = async (req, res) => {
   const { id: playlistId } = req.params;
 
   try {
     // 해당 플레이리스트 찾기
     const playlist = await Playlist.findById(playlistId)
-      .populate("songs")
+      .populate({
+        path: "songs",
+        populate: {
+          path: "likes",
+          model: "Like",
+          populate: {
+            path: "user",
+            model: "User",
+          },
+        },
+      })
       .populate("user");
+
+    // 로그인 되어있으면, 좋아요 여부 표시하여 플레이리스트 노래 목록 반환
+    const userId = req.session?.user?._id;
+
+    let songsWithLike;
+    let playlistWithSongsLiked = JSON.parse(JSON.stringify(playlist));
+
+    if (userId) {
+      songsWithLike = playlistWithSongsLiked.songs.map((song) => ({
+        song,
+        isLiked:
+          song.likes?.filter(
+            (like) => String(like?.user?._id) === String(userId)
+          ).length === 1
+            ? true
+            : false,
+      }));
+    } else {
+      songsWithLike = playlistWithSongsLiked.songs.map((song) => ({
+        song,
+        isLiked: false,
+      }));
+    }
+    playlistWithSongsLiked.songs = songsWithLike;
 
     // 렌더링
     return res.render("playlist/playlist", {
       pageTitle: playlist.name,
-      playlist,
+      playlist: playlistWithSongsLiked,
     });
 
     // 에러 핸들링
@@ -77,13 +140,16 @@ export const postCreate = async (req, res) => {
     }
 
     // 플레이리스트 생성
-    await Playlist.create({
+    const playlist = await Playlist.create({
       name,
       user,
       coverUrl: coverUrl === "" ? undefined : coverUrl,
     });
 
-    return res.redirect("/my");
+    await user.playlists.push(playlist);
+    await user.save();
+
+    return res.redirect("/playlist/my");
 
     // 에러 핸들링
   } catch (error) {
@@ -99,7 +165,7 @@ export const postCreate = async (req, res) => {
 export const getAdd = async (req, res) => {
   // 유저 확인
   if (!req.session.user) {
-    return res.json({ ok: false, errorMsg: "로그인이 필요합니다." });
+    return res.json({ ok: false, errorMsg: "로그인 후 이용해주세요." });
   }
 
   const {
@@ -109,7 +175,9 @@ export const getAdd = async (req, res) => {
   } = req;
 
   // 내 플레이리스트 목록 반환
-  const playlists = await Playlist.find({ user: userId });
+  const playlists = await Playlist.find({ user: userId }).sort({
+    createdAt: "desc",
+  });
 
   return res.json({ ok: true, playlists });
 };
@@ -137,16 +205,27 @@ export const postAdd = async (req, res) => {
 };
 
 export const postRemove = async (req, res) => {
-  const { playlistid, songId } = req.body;
+  const { playlistId, songId } = req.body;
 
-  // 플레이리스트 찾기
-  const playlist = await Playlist.findById(playlistid);
+  try {
+    // 플레이리스트 찾기
+    const playlist = await Playlist.findById(playlistId);
 
-  // 노래 삭제
-  playlist.songs.splice(playlist.songs.indexOf(songId), 1);
-  await playlist.save();
+    // 노래 삭제
+    playlist.songs.splice(playlist.songs.indexOf(songId), 1);
+    await playlist.save();
 
-  return res.json({ ok: true });
+    return res.json({ ok: true });
+
+    // 에러 핸들링
+  } catch (error) {
+    console.log("❌ 플레이리스트로부터 곡 제거 오류 발생 : ", error);
+
+    return res.json({
+      ok: false,
+      errorMsg: "서버 오류로 인해 실패했습니다.\n잠시 후 다시 시도해주세요.",
+    });
+  }
 };
 
 export const getPlaylistSongs = async (req, res) => {

@@ -1,6 +1,7 @@
 import express from "express";
 import {
   my,
+  like,
   playlist,
   getCreate,
   postCreate,
@@ -12,6 +13,8 @@ import { privateOnlyMiddleware } from "../middlewares";
 
 const playlistRouter = express.Router();
 
+playlistRouter.route("/like").all(privateOnlyMiddleware).get(like);
+
 playlistRouter.route("/my").all(privateOnlyMiddleware).get(my);
 
 playlistRouter.route("/:id([0-9a-f]{24})").get(playlist);
@@ -22,11 +25,7 @@ playlistRouter
   .get(getCreate)
   .post(postCreate);
 
-playlistRouter
-  .route("/add")
-  .all(privateOnlyMiddleware)
-  .get(getAdd)
-  .post(postAdd);
+playlistRouter.route("/add").get(getAdd).post(postAdd);
 
 playlistRouter.route("/remove").all(privateOnlyMiddleware).post(postRemove);
 

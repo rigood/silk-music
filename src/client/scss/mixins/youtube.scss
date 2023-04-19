@@ -1,0 +1,41 @@
+.youtube {
+  position: relative;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .overlay {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    border-radius: 12px;
+    transition: opacity 0.2s ease-in;
+
+    .fa {
+      position: absolute;
+      color: white;
+    }
+
+    .fa-play {
+      bottom: 14px;
+      right: 14px;
+      font-size: 14px;
+      padding: 14px;
+      background-color: black;
+      border-radius: 50%;
+    }
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+}

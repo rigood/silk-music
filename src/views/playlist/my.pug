@@ -1,1 +1,12 @@
 //- playlists 받음
+
+extends ../base
+include ../mixins/playlist
+
+block content
+    .left
+        h2 내 플레이리스트
+        ul.my-page
+            +playlist(false)
+            each playlist in playlists
+                +playlist(true, playlist)

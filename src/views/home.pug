@@ -1,3 +1,24 @@
-extends base
-
 //- popularSongs, latestSongs, recommendedPlaylists 받음
+
+extends base
+include mixins/youtube
+include mixins/miniSongWithAdd
+include mixins/playlist
+
+block content
+    .left
+        h3 인기 음악
+        ul.popular
+            each song in popularSongs
+                +youtube(song)
+
+        h3 최신 음악
+        ul.latest
+            each song in latestSongs
+                +miniSongWithAdd(song)
+
+        h3 추천 플레이리스트
+        ul.recommended
+            each playlist in recommendedPlaylists
+                +playlist(true, playlist)
+

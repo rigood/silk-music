@@ -7,19 +7,12 @@ const songSchema = new mongoose.Schema({
   artist: { type: String, required: true },
   album: {
     type: String,
-    default: function () {
-      if (this.artist) {
-        return this.artist;
-      } else {
-        return "앨범명 없음";
-      }
-    },
   },
   coverUrl: {
     type: String,
     default: "/public/client/img/defaultSongCover.png",
   },
-  youtubeId: { type: String, required: true },
+  youtubeId: { type: String, required: true, unique: true },
   playTime: { type: Number, required: true },
   releasedAt: { type: Date, required: true },
   createdAt: { type: Date, required: true, default: Date.now },

@@ -5,10 +5,18 @@
 // Components
 @import "./components/nav.scss";
 @import "./components/player.scss";
+@import "./components/modal.scss";
 
 // Mixins
+@import "./mixins/radio.scss";
+@import "./mixins/song.scss";
+@import "./mixins/playlist.scss";
+@import "./mixins/youtube.scss";
+@import "./mixins/member.scss";
 
 // Screens
+@import "./screens/center.scss";
+@import "./screens/left.scss";
 
 // Fonts
 
@@ -73,4 +81,52 @@ input:autofill:active {
   -webkit-box-shadow: 0 0 0px 1000px #fff inset;
   box-shadow: 0 0 0px 1000px #fff inset;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+main {
+  margin-left: 250px;
+  padding: 60px 70px 140px;
+}
+
+// flash
+@keyframes fadeOut {
+  from {
+    transform: none;
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-60px);
+    opacity: 0;
+  }
+}
+
+.message {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 9999;
+
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: 12px;
+
+  text-align: center;
+  white-space: pre;
+  font-size: 14px;
+  line-height: 1.5;
+
+  animation: fadeOut 1s ease-in-out forwards;
+  animation-delay: 1s;
+
+  &.ok {
+    background-color: green;
+    color: white;
+  }
+
+  &.error {
+    background-color: red;
+    color: white;
+  }
 }

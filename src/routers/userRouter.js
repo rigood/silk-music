@@ -13,8 +13,6 @@ const userRouter = express.Router();
 
 userRouter.get("/logout", privateOnlyMiddleware, logout);
 
-userRouter.get("/:id([0-9a-f]{24})", profile);
-
 userRouter.get("/:id([0-9a-f]{24})/points", points);
 
 userRouter

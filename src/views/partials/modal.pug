@@ -1,0 +1,9 @@
+#modal
+    .wrapper
+        .title
+        .contents
+            if playlists
+                each playlist, index in playlists
+                    li
+                        img(src=playlist.coverUrl)
+                        span=playlist.name

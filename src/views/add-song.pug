@@ -1,0 +1,39 @@
+extends base
+
+block content
+    .center
+        h2 곡 등록
+
+        if errorMsg
+            .error=errorMsg
+
+        form(method="POST")#addSongForm
+            .label 유튜브 영상 주소
+            input(name="youtubeUrl" id="addSongYoutubeUrlInput" placeholder="유튜브 영상 주소를 입력해주세요." type="text" required)
+            button(type="button")#addSongPreviewBtn 미리보기
+
+            .label 유튜브 영상 미리보기
+            #addSongYoutubeWrapper
+                #addSongYoutubeIframe
+
+            .label (자동) 유튜브 영상 ID
+            input(name="youtubeId" id="addSongYoutubeIdInput" placeholder="(자동) 유튜브 영상 ID가 입력됩니다." type="text" required readonly)
+
+            .label 제목
+            input(name="title" id="addSongTitleInput" placeholder="곡 제목을 입력해주세요." type="text" required autofocus)
+
+            .label 아티스트명
+            input(name="artist" id="addSongArtistInput" placeholder="아티스트명을 입력해주세요." type="text" required)
+
+            .label (선택) 앨범명
+            input(name="album" id="addSongAlbumInput" placeholder="(선택) 앨범명을 입력해주세요." type="text")
+
+            .label (선택) 발매일
+            input(name="releasedAt" id="addSongReleasedAtInput" placeholder="(선택) 곡 발매일을 입력해주세요." type="date")
+
+            .label (자동) 재생시간
+            input(name="playTime" id="addSongPlayTimeInput" placeholder="(자동) 곡 재생시간이 입력됩니다." type="number" required readonly)            
+
+            button(type="submit") 곡 등록
+
+    script(src="/static/js/addSong.js") 

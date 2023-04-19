@@ -50,14 +50,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      column-gap: 20px;
+      column-gap: 30px;
 
       i {
+        font-size: 24px;
         cursor: pointer;
       }
 
       #playBtn {
-        font-size: 30px;
+        font-size: 36px;
+        color: $primary;
       }
 
       #randomBtn,
@@ -93,10 +95,10 @@
         top: 0;
         left: 0;
         z-index: 9998;
-
         padding: 3px 6px;
         border-radius: 2px;
         background-color: white;
+        color: $playerBg;
         font-size: 12px;
       }
     }
@@ -104,7 +106,7 @@
     .volume-area {
       display: flex;
       align-items: center;
-      margin: 0 10px;
+      margin: 0 20px;
       cursor: pointer;
 
       i {
@@ -129,8 +131,8 @@
     }
 
     .toggle-area {
-      width: 20px;
-      height: 14px;
+      width: 30px;
+      height: 20px;
       position: relative;
       cursor: pointer;
 
@@ -140,7 +142,7 @@
         width: 100%;
         height: 2px;
         border-radius: 1px;
-        background-color: $playerBg;
+        background-color: $text;
         transition: all 0.2s;
 
         &:nth-child(1) {
@@ -220,8 +222,16 @@
       flex-direction: column;
       background-color: $playerBg;
 
-      #label {
-        padding: 15px;
+      .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px;
+        #label {
+          font-size: 24px;
+          font-weight: bold;
+        }
+        #screenToggle {
+        }
       }
 
       #playlist {
@@ -238,9 +248,9 @@
           }
 
           &.nowPlaying {
-            background-color: $primary;
+            background-color: $nowPlaying;
             &:hover {
-              background-color: $primary;
+              background-color: $nowPlaying;
             }
           }
 
@@ -248,17 +258,35 @@
             width: 50px;
             height: 50px;
             object-fit: cover;
+            border-radius: 5px;
             margin-right: 15px;
           }
 
           .info {
             display: flex;
             flex-direction: column;
+            row-gap: 7.5px;
             flex: 1;
+
+            .title {
+              font-size: 14px;
+              font-weight: bold;
+            }
+
+            .artist {
+              font-size: 14px;
+              color: $subText;
+            }
           }
 
           i {
+            visibility: hidden;
+            padding: 10px;
             cursor: pointer;
+          }
+
+          &:hover i {
+            visibility: visible;
           }
         }
       }

@@ -13,7 +13,7 @@ nav {
 
   user-select: none;
 
-  padding: 30px;
+  padding: 40px 30px;
 
   .logo {
     margin-bottom: 40px;
@@ -38,9 +38,15 @@ nav {
         display: block;
         width: 60px;
         height: 60px;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 50%;
       }
+    }
+
+    .user-email {
+      font-size: 12px;
+      color: $subText;
+      margin-bottom: 5px;
     }
 
     .user-nickname {

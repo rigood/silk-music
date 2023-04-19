@@ -1,0 +1,78 @@
+[
+  {
+    "_id": "643f739c74e98811f8450e9e",
+    "coverUrl": "https://musicmeta-phinf.pstatic.net/album/009/313/9313232.jpg?type=r360Fll&v=202304140001",
+    "views": 0,
+    "likes": [],
+    "title": "Like Crazy",
+    "artist": "지민",
+    "playTime": 224,
+    "releasedAt": {
+      "$date": "2023-03-24T00:00:00.000Z"
+    },
+    "album": "FACE",
+    "youtubeId": "nOI67IDlNMQ",
+    "createdAt": {
+      "$date": "2023-04-19T04:52:44.238Z"
+    },
+    "point": 0,
+    "__v": 9
+  },
+  {
+    "_id": "643f739c74e98811f8450e9f",
+    "coverUrl": "https://musicmeta-phinf.pstatic.net/album/008/744/8744266.jpg?type=r360Fll&v=202304140001",
+    "views": 0,
+    "likes": [],
+    "title": "Wonder Why",
+    "artist": "경서",
+    "playTime": 203,
+    "releasedAt": {
+      "$date": "2023-01-25T00:00:00.000Z"
+    },
+    "album": "사랑의 이해 OST Part.7",
+    "youtubeId": "aWZuhwo3tPY",
+    "createdAt": {
+      "$date": "2023-04-19T04:52:44.275Z"
+    },
+    "point": 0,
+    "__v": 12
+  },
+  {
+    "_id": "643f879a5686033558b57915",
+    "coverUrl": "https://i.ytimg.com/vi/xVwh4sjyRGI/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBqjtM3FPnsV5921GBtMOWKw5VCAQ",
+    "views": 0,
+    "likes": [],
+    "title": "이별편지",
+    "artist": "진욱",
+    "album": "미스터트롯2 준결승전 신곡 미션",
+    "releasedAt": {
+      "$date": "2023-03-10T00:00:00.000Z"
+    },
+    "playTime": 229,
+    "youtubeId": "xVwh4sjyRGI",
+    "createdAt": {
+      "$date": "2023-04-19T06:18:02.800Z"
+    },
+    "point": 1,
+    "__v": 0
+  },
+  {
+    "_id": "643f879a5686033558b57916",
+    "coverUrl": "https://i.ytimg.com/vi/HB8Y_Qv9Be8/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAfUPJPFAP5Wx3CVN73uxFb__pKrA",
+    "views": 0,
+    "likes": [],
+    "title": "가시오",
+    "artist": "진욱",
+    "album": "미스터트롯2 라이벌 매치 베스트 PART1",
+    "releasedAt": {
+      "$date": "2023-02-24T00:00:00.000Z"
+    },
+    "playTime": 224,
+    "youtubeId": "HB8Y_Qv9Be8",
+    "createdAt": {
+      "$date": "2023-04-19T06:18:02.803Z"
+    },
+    "point": 1,
+    "__v": 1
+  }
+]

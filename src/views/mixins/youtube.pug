@@ -1,0 +1,5 @@
+mixin youtube(song)
+    li.youtube(data-id=song.song._id)
+        img(src=`${song.song.coverUrl}`)
+        .overlay.play-btn
+            i.fa.fa-play

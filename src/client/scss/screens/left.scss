@@ -1,0 +1,102 @@
+.left {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin-bottom: 38px;
+    font-size: 38px;
+    font-weight: bold;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .msg {
+    margin-top: 10px;
+    color: $primary;
+  }
+
+  // rank 화면
+  .desc {
+    font-size: 14px;
+    color: $primary;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  // 메인화면
+
+  .popular {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 50px;
+  }
+
+  .latest {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    align-items: center;
+    row-gap: 10px;
+    column-gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .recommended {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(180px, 1fr));
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  // [playlist/my] playlist-mixin 격자 배치
+  // ul 태그에 적용된 클래스
+  .my-page {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
+    gap: 20px;
+  }
+
+  // [playlist/:id] playlist 정보
+  // div 태그에 적용된 클래스
+  .playlist-page {
+    display: flex;
+    column-gap: 30px;
+    margin-bottom: 40px;
+
+    .left-col {
+      img {
+        display: block;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+      }
+    }
+    .right-col {
+      padding-top: 5px;
+
+      .name {
+        margin-bottom: 10px;
+        font-size: 32px;
+        font-weight: bold;
+      }
+      .user {
+        margin-bottom: 16px;
+        font-size: 16px;
+        color: $subText;
+      }
+
+      button {
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

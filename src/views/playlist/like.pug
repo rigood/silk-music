@@ -1,0 +1,12 @@
+extends ../base
+include ../mixins/songWithAdd
+
+block content
+    .left
+        h2 좋아요 누른 곡
+        ul
+            each song, index in songs
+                +songWithAdd(song, index)
+            else
+                .msg="좋아요 누른 곡이 없습니다."
+

@@ -1,0 +1,16 @@
+mixin member(member, index)
+    .member
+        .rank
+            if index===0
+                span="🥇 "
+            if index===1
+                span="🥈 "
+            if index===2
+                span="🥉 "
+            span=index+1+"위"
+        .cover
+            img(src=member.avatarUrl)
+        .name=member.name
+        .email=member.email
+        .points=member.points+"점"
+        .createdAt=member.createdAt.toLocaleDateString("ko-KR")+" 가입"

@@ -1,2 +1,20 @@
 //- keyword
 //- keyword, songs, count 받음
+
+extends base
+include mixins/songWithAdd
+
+block content
+    .center
+        h2 검색
+        form(method="POST")
+            input(type="text" name="keyword" placeholder="제목 혹은 아티스트를 검색하세요." value=keyword required)
+            .msg * Silk-Music DB에서 곡을 검색합니다.
+        .search-page
+            if songs
+                .count
+                    strong=`'${keyword}' ` 
+                    span 검색 결과 총 #{count}건
+                ul
+                    each song, index in songs
+                        +songWithAdd(song, index)

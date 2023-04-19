@@ -102,10 +102,6 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 
-export const profile = (req, res) => {
-  return res.render("user/profile", { pageTitle: "내 프로필" });
-};
-
 export const points = (req, res) => {
   return res.render("user/points", { pageTitle: "내 포인트" });
 };
@@ -145,7 +141,7 @@ export const postEdit = async (req, res) => {
     req.session.user = updatedUser;
 
     req.flash("ok", "프로필이 수정되었습니다.");
-    return res.redirect(`/user/${_id}`);
+    return res.redirect("/");
 
     // 에러 핸들링
   } catch (error) {
@@ -213,4 +209,15 @@ export const postChangePw = async (req, res) => {
       errorMsg: "서버 오류로 인해 실패했습니다.",
     });
   }
+};
+
+export const rank = async (req, res) => {
+  const pageTitle = "스트리밍 랭킹";
+
+  const members = await User.find({}).sort({
+    points: "desc",
+    createdAt: "desc",
+  });
+
+  return res.render("rank", { pageTitle, members });
 };

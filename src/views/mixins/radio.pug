@@ -1,0 +1,7 @@
+mixin radio(name, defaultName, kind)
+    label(for=name)
+        if defaultName.includes(name)
+            input(type="radio" name=kind id=name value=`/public/client/img/${name}.png` checked)
+        else
+            input(type="radio" name=kind id=name value=`/public/client/img/${name}.png`)
+        img(src=`/public/client/img/${name}.png`)
