@@ -1,11 +1,18 @@
 include mixins/message
 
 doctype html
-html(lang="ko" data-mode="dark")
+html(lang="ko")
     head
+        script.
+            const theme = localStorage.getItem("silk_music_theme") || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("silk_music_theme", theme);
+
         title #{pageTitle} | #{siteName}
+
         link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
         link(rel="stylesheet" href="/static/css/styles.css")
+
         link(rel="apple-touch-icon" sizes="57x57" href="/public/client/img/favicon/apple-icon-57x57.png")
         link(rel="apple-touch-icon" sizes="60x60" href="/public/client/img/favicon/apple-icon-60x60.png")
         link(rel="apple-touch-icon" sizes="72x72" href="/public/client/img/favicon/apple-icon-72x72.png")
@@ -23,20 +30,31 @@ html(lang="ko" data-mode="dark")
         meta(name="msapplication-TileColor" content="#ffffff")
         meta(name="msapplication-TileImage" content="/public/client/img/favicon/ms-icon-144x144.png")
         meta(name="theme-color" content="#ffffff")
+
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible' content='IE=edge')
         meta(name='description' content='Some description')
         meta(name='viewport' content='width=device-width, initial-scale=1')
+
     body
         if messages.ok
             +message("ok", messages.ok)
         if messages.error
             +message("error", messages.error)
-        include partials/nav                 
+
+        include partials/nav      
+
         main
             block content
+
         include partials/player
         include partials/modal
+
+    script.
+        const toggleThemeIcon = document.getElementById("toggleThemeBtn");
+        toggleThemeIcon.className =  theme==="dark" ? "fa fa-sun" : "fa fa-moon" ;
+
     script(src="http://www.youtube.com/iframe_api")
-    script(src="/static/js/main.js") 
+    script(src="/static/js/main.js")
+
     block scripts

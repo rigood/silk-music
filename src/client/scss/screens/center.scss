@@ -20,7 +20,7 @@
 
     .msg {
       font-size: 14px;
-      color: $primary;
+      color: var(--primary);
       text-align: center;
       margin-bottom: 20px;
     }
@@ -41,7 +41,7 @@
   }
   .errorMsg {
     font-size: 12px;
-    color: $primary;
+    color: var(--primary);
   }
 
   // [/search] search result 정보
@@ -55,7 +55,7 @@
 
       strong {
         font-weight: bold;
-        color: $primary;
+        color: var(--primary);
       }
     }
   }
@@ -67,7 +67,7 @@
     height: 0;
     padding-bottom: 56.25%;
     margin-bottom: 40px;
-    background-color: $playerBgHover;
+    background-color: var(--playerBg) Hover;
     overflow: hidden;
 
     #addSongYoutubeIframe {
@@ -82,7 +82,7 @@
   // [/add-song] 에러 메세지
   .error {
     margin-bottom: 40px;
-    color: $primary;
+    color: var(--primary);
   }
 
   // [/playlist/create] 커버 이미지 미리보기

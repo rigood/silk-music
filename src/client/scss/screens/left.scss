@@ -16,13 +16,13 @@
 
   .msg {
     margin-top: 10px;
-    color: $primary;
+    color: var(--primary);
   }
 
   // rank 화면
   .desc {
     font-size: 14px;
-    color: $primary;
+    color: var(--primary);
     margin-top: -10px;
     margin-bottom: 30px;
     line-height: 1.5;
@@ -89,7 +89,7 @@
       .user {
         margin-bottom: 16px;
         font-size: 16px;
-        color: $subText;
+        color: var(--subText);
       }
 
       button {

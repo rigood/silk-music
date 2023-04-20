@@ -6,6 +6,7 @@
 @import "./components/nav.scss";
 @import "./components/player.scss";
 @import "./components/modal.scss";
+@import "./components/message.scss";
 
 // Mixins
 @import "./mixins/radio.scss";
@@ -41,21 +42,36 @@
   box-sizing: border-box;
 }
 
-html[data-mode="dark"] {
-  --color: red;
+html[data-theme="dark"] {
+  --bg: #000000;
+  --text: #ffffff;
+  --subText: #888888;
+  --playerBg: #191919;
+  --playerBgHover: #222222;
+  --modalBg: #222222;
+  --modalBgHover: #2a2a2a;
+  --primary: #f6c2ce;
+  --nowPlaying: #3f3f46;
 }
 
-html[data-mode="light"] {
-  background: var(--lightBg);
-  --color: blue;
+html[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #0e1117;
+  --subText: #828282;
+  --playerBg: #fe2b74;
+  --playerBgHover: blue;
+  --modalBg: #ffffff;
+  --modalBgHover: #cbcbcb;
+  --primary: #fe2b74;
+  --nowPlaying: #f6c2ce;
 }
 
 body {
   font-family: "Pretendard-Regular";
   font-size: 16px;
-  color: $text;
+  color: var(--text);
 
-  background-color: $bg;
+  background-color: var(--bg);
 
   &.scrollHide {
     overflow-y: hidden;
@@ -95,47 +111,4 @@ input:autofill:active {
 main {
   margin-left: 250px;
   padding: 60px 70px 140px;
-}
-
-// flash
-@keyframes fadeOut {
-  from {
-    transform: none;
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-60px);
-    opacity: 0;
-  }
-}
-
-.message {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  z-index: 9999;
-
-  width: fit-content;
-  padding: 10px 20px;
-  border-radius: 12px;
-
-  text-align: center;
-  white-space: pre;
-  font-size: 14px;
-  line-height: 1.5;
-
-  animation: fadeOut 1s ease-in-out forwards;
-  animation-delay: 1s;
-
-  &.ok {
-    background-color: green;
-    color: white;
-  }
-
-  &.error {
-    background-color: red;
-    color: white;
-  }
 }

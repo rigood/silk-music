@@ -1,3 +1,7 @@
 mixin message(kind, text)
     div.message(class=kind)
+        if kind==="ok"
+            i.fa.fa-check
+        if kind==="error"
+            i.fa.fa-exclamation
         span=text

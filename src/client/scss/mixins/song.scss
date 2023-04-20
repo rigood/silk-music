@@ -6,7 +6,7 @@
   padding: 15px 0;
 
   &:hover {
-    background-color: $playerBgHover;
+    background-color: var(--playerBg) Hover;
   }
 
   .rank {
@@ -62,7 +62,7 @@
 
     .artist {
       font-size: 14px;
-      color: $subText;
+      color: var(--subText);
     }
   }
 
@@ -79,7 +79,7 @@
   }
 
   .isLiked {
-    color: $primary;
+    color: var(--primary);
   }
 }
 
@@ -132,7 +132,7 @@
 
     .artist-album {
       font-size: 12px;
-      color: $subText;
+      color: var(--subText);
       --max-lines: 1;
       display: -webkit-box;
       -webkit-line-clamp: var(--max-lines);
@@ -154,7 +154,7 @@
   }
 
   .isLiked {
-    color: $primary;
+    color: var(--primary);
   }
 
   &:hover .play i,
