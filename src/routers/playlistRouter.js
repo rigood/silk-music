@@ -1,8 +1,11 @@
 import express from "express";
 import {
-  my,
   like,
+  my,
   playlist,
+  getEdit,
+  postEdit,
+  postDelete,
   getCreate,
   postCreate,
   getAdd,
@@ -18,6 +21,14 @@ playlistRouter.route("/like").all(privateOnlyMiddleware).get(like);
 playlistRouter.route("/my").all(privateOnlyMiddleware).get(my);
 
 playlistRouter.route("/:id([0-9a-f]{24})").get(playlist);
+
+playlistRouter
+  .route("/:id([0-9a-f]{24})/edit")
+  .all(privateOnlyMiddleware)
+  .get(getEdit)
+  .post(postEdit);
+
+playlistRouter.route("/delete").all(privateOnlyMiddleware).post(postDelete);
 
 playlistRouter
   .route("/create")

@@ -84,4 +84,16 @@
     margin-bottom: 40px;
     color: $primary;
   }
+
+  // [/playlist/create] 커버 이미지 미리보기
+  // [/playlist/:id/edit] 커버 이미지 미리보기
+  #createCoverPreview,
+  #editCoverPreview {
+    margin-bottom: 20px;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
+  }
 }

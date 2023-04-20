@@ -15,6 +15,8 @@ block content
                     button(data-id=playlist._id).play-all
                         i.fa.fa-play
                         span=playlist.songs.length+"곡 전체 재생"
+                if playlist.user._id === loggedInUser._id
+                    a(href=`/playlist/${playlist._id}/edit`) 편집
         ul
             each song, index in playlist.songs
                 +songWithRemove(song, index, playlist._id, playlist.user._id)

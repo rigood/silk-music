@@ -33,6 +33,7 @@ export const postJoin = async (req, res) => {
       name: "기본 플레이리스트",
       user,
       coverUrl: undefined,
+      isDefault: true,
     });
     await user.playlists.push(defaultPlaylist);
     await user.save();

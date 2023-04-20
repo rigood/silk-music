@@ -139,11 +139,17 @@ export const postCreate = async (req, res) => {
       return res.redirect("/");
     }
 
+    // 플레이리스트 커버 이미지 주소 확인
+    const regExp =
+      /(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg|.gif|.webp|.svg)(\?[^\s[",><]*)?/;
+
+    const isCoverUrlValid = coverUrl.match(regExp);
+
     // 플레이리스트 생성
     const playlist = await Playlist.create({
       name,
       user,
-      coverUrl: coverUrl === "" ? undefined : coverUrl,
+      coverUrl: isCoverUrlValid ? coverUrl : undefined,
     });
 
     await user.playlists.push(playlist);
@@ -160,6 +166,89 @@ export const postCreate = async (req, res) => {
       errorMsg: "서버 오류로 인해 실패했습니다.",
     });
   }
+};
+
+export const getEdit = async (req, res) => {
+  const pageTitle = "플레이리스트 편집";
+
+  const { id } = req.params;
+
+  const playlist = await Playlist.findById(id);
+
+  const {
+    session: {
+      user: { _id: userId },
+    },
+  } = req;
+
+  if (userId !== String(playlist.user._id)) {
+    req.flash("error", "잘못된 접근입니다.");
+    return res.redirect("/");
+  }
+
+  return res.render("playlist/edit", { pageTitle, playlist });
+};
+
+export const postEdit = async (req, res) => {
+  const { id } = req.params;
+
+  const {
+    body: { name, coverUrl },
+  } = req;
+
+  // 플레이리스트 커버 이미지 주소 확인
+  const regExp =
+    /(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg|.gif|.webp|.svg)(\?[^\s[",><]*)?/;
+
+  const isCoverUrlValid = coverUrl.match(regExp);
+
+  const defaultCoverUrl = "/public/client/img/defaultPlaylistCover.png";
+
+  // 플레이리스트 생성
+  await Playlist.findByIdAndUpdate(id, {
+    name,
+    coverUrl: isCoverUrlValid ? coverUrl : defaultCoverUrl,
+  });
+
+  req.flash("ok", "플레이리스트가 정상적으로 수정되었습니다.");
+  return res.redirect(`/playlist/${id}`);
+};
+
+export const postDelete = async (req, res) => {
+  const {
+    body: { playlistId },
+    session: {
+      user: { _id: userId },
+    },
+  } = req;
+
+  const playlist = await Playlist.findById(playlistId);
+  const user = await User.findById(userId);
+
+  if (!playlist) {
+    req.flash("error", "이미 삭제된 플레이리스트입니다.");
+    return redirect("/playlist/my");
+  }
+
+  if (!user) {
+    req.flash("error", "잘못된 접근입니다.");
+    return res.redirect("/");
+  }
+
+  if (playlist.isDefault) {
+    return res.json({
+      ok: false,
+      errorMsg:
+        "회원가입 시 자동으로 부여된 기본 플레이리스트는\n삭제할 수 없습니다.",
+    });
+  }
+
+  await Playlist.findByIdAndDelete(playlistId);
+
+  await user.playlists.splice(user.playlists.indexOf(playlistId), 1);
+  await user.save();
+
+  return res.json({ ok: true });
 };
 
 export const getAdd = async (req, res) => {

@@ -41,6 +41,15 @@
   box-sizing: border-box;
 }
 
+html[data-mode="dark"] {
+  --color: red;
+}
+
+html[data-mode="light"] {
+  background: var(--lightBg);
+  --color: blue;
+}
+
 body {
   font-family: "Pretendard-Regular";
   font-size: 16px;

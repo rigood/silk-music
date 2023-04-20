@@ -81,7 +81,7 @@ function loadTracks() {
       repeat: "off",
       isPlay: false,
       isPause: false,
-      isBuffering: false,
+      isBuffer: false,
       nowTime: 0,
       totalTime: 0,
     };
@@ -95,6 +95,10 @@ function loadTracks() {
     setLocal(data);
 
     localStorage.setItem(APP_VOLUME, 50);
+
+    cover.src = "/public/client/img/defaultSongCover.png";
+    title.innerText = "오늘 뭐 듣지?";
+    artist.innerText = "플레이어를 열고 음악을 감상해보세요.";
   }
 
   tracks.forEach((track) => addTrack(track));
@@ -322,6 +326,11 @@ function updateTimerDisplay() {
 
   currentTime.innerText = formatTime(youtube.getCurrentTime());
   duration.innerText = formatTime(youtube.getDuration());
+
+  const local = getLocal();
+  local.config.nowTime = formatTime(youtube.getCurrentTime());
+  local.config.totalTime = formatTime(youtube.getDuration());
+  setLocal(local);
 }
 
 // progress 업데이트
@@ -539,7 +548,6 @@ repeatBtn.addEventListener("click", function (event) {
 async function onPlayerStateChange(event, idx) {
   // ended
   if (event.data === 0) {
-    // console.log("ended", event);
     playBtn.className = "fa fa-play";
 
     const repeat = getLocal().config.repeat;
@@ -586,21 +594,12 @@ async function onPlayerStateChange(event, idx) {
 
   // playing
   if (event.data === 1) {
-    // console.log("playing", event);
-
     playBtn.className = "fa fa-pause";
   }
 
   // paused
   if (event.data === 2) {
-    // console.log("paused", event);
-
     playBtn.className = "fa fa-play";
-  }
-
-  // buffering
-  if (event.data === 3) {
-    // console.log("buffering", event);
   }
 }
 
@@ -667,7 +666,6 @@ async function playAllSongsOnPlaylist(event) {
   const result = await (await fetch(`/api/playlist/${id}`)).json();
 
   if (result.ok) {
-    console.log(result.songs);
     let local = getLocal();
     local.tracks = result.songs;
     local.nowTrack.targetTrack = result.songs[0];

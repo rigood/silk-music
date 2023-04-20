@@ -1,0 +1,25 @@
+extends ../base
+
+block content
+    .center
+        h2 플레이리스트 편집
+        form(method="POST")
+            .label 이름
+            input(name="name" id="name" placeholder="플레이리스트 이름" type="text" required value=playlist.name)
+
+            .label (선택) 커버 이미지 주소
+            input(name="coverUrl" id="editCoverPreviewInput" placeholder="플레이리스트 커버 이미지 주소를 입력해주세요." type="text" value=playlist.coverUrl)
+            button(type="button")#editCoverPreviewBtn 미리보기
+
+            .label 이미지 미리보기
+            #editCoverPreview
+                img(src=playlist.coverUrl)
+
+            button(type="submit") 수정하기
+
+            .label 플레이리스트 삭제
+            button(type="button" data-id=playlist._id)#deletePlaylistBtn 삭제하기
+        if errorMsg
+            .errorMsg=errorMsg
+
+    script(src="/static/js/edit.js") 
