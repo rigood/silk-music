@@ -18,3 +18,22 @@ function toggleTheme(event) {
     localStorage.setItem("silk_music_theme", "dark");
   }
 }
+
+const toggleNavBtn = document.getElementById("toggleNavBtn");
+toggleNavBtn.addEventListener("click", toggleNav);
+const nav = document.querySelector(".nav");
+const miniNav = document.querySelector(".miniNav");
+const navCloseBtn = document.getElementById("navCloseBtn");
+navCloseBtn.addEventListener("click", closeNav);
+
+function toggleNav() {
+  nav.classList.toggle("show");
+  miniNav.classList.toggle("hide");
+  document.body.classList.toggle("scrollHide");
+}
+
+function closeNav() {
+  nav.classList.toggle("show");
+  miniNav.classList.toggle("hide");
+  document.body.classList.toggle("scrollHide");
+}

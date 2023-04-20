@@ -42,7 +42,11 @@ html(lang="ko")
         if messages.error
             +message("error", messages.error)
 
-        include partials/nav      
+        include partials/miniNav
+
+        include partials/nav
+
+        i#toggleThemeBtn      
 
         main
             block content

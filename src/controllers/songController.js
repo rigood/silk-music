@@ -7,7 +7,7 @@ export const home = async (req, res) => {
   // 인기음악 (조회수 기준 정렬)
   const popularSongs = await Song.find({ artist: "진욱" })
     .sort({ views: "desc" })
-    .limit(5)
+    .limit(4)
     .populate("likes");
 
   // 최신음악 (발매일, 조회수 기준 정렬)
