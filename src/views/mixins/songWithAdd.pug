@@ -9,12 +9,15 @@ mixin songWithAdd(song, index)
             span.title=song.song.title
             span.artist=song.song.artist
         .album=song.song.album
+        .view
+            i.far.fa-eye
+            span=song.song.views
         .play.play-btn
             i.fa.fa-play
+        .add
+            i.fa.fa-plus
         .like
             if song.isLiked
                 i.fa.fa-heart.isLiked
             else
                 i.far.fa-heart
-        .add
-            i.fa.fa-plus

@@ -11,68 +11,13 @@
     height: 80px;
     background-color: var(--playerBg);
 
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
     align-items: center;
+    column-gap: 10px;
 
     padding: 0 20px;
-
-    .info-area {
-      display: flex;
-
-      img {
-        margin-right: 10px;
-
-        display: block;
-        width: 45px;
-        height: 45px;
-        object-fit: cover;
-        border-radius: 5px;
-      }
-
-      .info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 7.5px;
-
-        #title {
-          font-size: 14px;
-          font-weight: bold;
-        }
-        #artist {
-          font-size: 12px;
-        }
-      }
-    }
-
-    .control-area {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      column-gap: 30px;
-
-      i {
-        font-size: 24px;
-        cursor: pointer;
-      }
-
-      #playBtn {
-        font-size: 36px;
-        color: var(--primary);
-      }
-
-      #randomBtn,
-      #repeatBtn {
-        color: gray;
-      }
-    }
-
-    .time-area {
-      span {
-        font-size: 12px;
-      }
-    }
 
     .progress-area {
       position: absolute;
@@ -103,69 +48,146 @@
       }
     }
 
-    .volume-area {
+    .info-area {
       display: flex;
-      align-items: center;
-      margin: 0 20px;
-      cursor: pointer;
 
-      i {
-        padding: 5px;
+      img {
+        margin-right: 10px;
+
+        display: block;
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border-radius: 5px;
       }
 
-      #volumeBar-area {
-        padding: 10px 0;
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 7.5px;
 
-        #volumeBarTotal {
-          width: 100px;
-          height: 3px;
-          background-color: gray;
+        #title {
+          font-size: 14px;
+          font-weight: bold;
 
-          #volumeBar {
-            width: 0%;
-            height: 100%;
-            background-color: var(--primary);
-          }
+          --max-lines: 1;
+          display: -webkit-box;
+          -webkit-line-clamp: var(--max-lines);
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        #artist {
+          font-size: 12px;
+          color: var(--subText);
+
+          --max-lines: 1;
+          display: -webkit-box;
+          -webkit-line-clamp: var(--max-lines);
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       }
     }
 
-    .toggle-area {
-      width: 30px;
-      height: 20px;
-      position: relative;
-      cursor: pointer;
+    .control-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 30px;
 
-      span {
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        border-radius: 1px;
-        background-color: var(--text);
-        transition: all 0.2s;
+      i {
+        font-size: 24px;
+        cursor: pointer;
+      }
 
-        &:nth-child(1) {
-          top: 0;
+      #playBtn {
+        font-size: 36px;
+        color: var(--primary);
+      }
+
+      #randomBtn,
+      #repeatBtn {
+        color: gray;
+      }
+    }
+
+    .last {
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      column-gap: 20px;
+
+      .time-area {
+        span {
+          font-size: 12px;
+          user-select: none;
         }
-        &:nth-child(2) {
-          top: 50%;
-          transform: translateY(-50%);
-        }
-        &:nth-child(3) {
-          bottom: 0;
+      }
+
+      .volume-area {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        i {
+          padding: 5px;
         }
 
-        &:nth-child(1).show {
-          top: 50%;
-          transform: translateY(-50%) rotate(45deg);
+        #volumeBar-area {
+          padding: 10px 0;
+
+          #volumeBarTotal {
+            width: 100px;
+            height: 3px;
+            background-color: gray;
+
+            #volumeBar {
+              width: 0%;
+              height: 100%;
+              background-color: var(--primary);
+            }
+          }
         }
-        &:nth-child(2).show {
-          opacity: 0;
-        }
-        &:nth-child(3).show {
-          bottom: 50%;
-          transform: translateY(50%) rotate(-45deg);
+      }
+
+      .toggle-area {
+        width: 30px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+
+        span {
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          border-radius: 1px;
+          background-color: var(--text);
+          transition: all 0.2s;
+
+          &:nth-child(1) {
+            top: 0;
+          }
+          &:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+          }
+          &:nth-child(3) {
+            bottom: 0;
+          }
+
+          &:nth-child(1).show {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+          }
+          &:nth-child(2).show {
+            opacity: 0;
+          }
+          &:nth-child(3).show {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+          }
         }
       }
     }
@@ -183,10 +205,12 @@
     transform: translate3d(0, 100%, 0);
     transition: 0.3s all ease-in-out;
 
+    width: 100%;
     height: 100%;
     padding-top: 80px;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 360px;
     background-color: var(--playerBg);
 
     &.show {
@@ -196,7 +220,7 @@
     }
 
     .youtube-area {
-      flex: 3;
+      width: 100%;
       background-color: var(--playerBg);
 
       #youtubeWrapper {
@@ -216,8 +240,21 @@
       }
     }
 
+    #screenToggleBtn {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      border: none;
+      border-bottom-left-radius: 5px;
+      background-color: var(--nowPlaying);
+      font-size: 14px;
+      color: var(--text);
+    }
+
     .playlist-area {
-      flex: 1;
+      width: 100%;
       display: flex;
       flex-direction: column;
       background-color: var(--playerBg);
@@ -227,15 +264,16 @@
         justify-content: space-between;
         padding: 30px;
         #label {
-          font-size: 24px;
+          font-size: 20px;
           font-weight: bold;
-        }
-        #screenToggle {
         }
       }
 
       #playlist {
         overflow-y: auto;
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         li {
           display: flex;
@@ -244,7 +282,7 @@
           cursor: pointer;
 
           &:hover {
-            background-color: var(--playerBg) Hover;
+            background-color: var(--playerBgHover);
           }
 
           &.nowPlaying {
@@ -271,11 +309,23 @@
             .title {
               font-size: 14px;
               font-weight: bold;
+
+              --max-lines: 1;
+              display: -webkit-box;
+              -webkit-line-clamp: var(--max-lines);
+              -webkit-box-orient: vertical;
+              overflow: hidden;
             }
 
             .artist {
-              font-size: 14px;
+              font-size: 12px;
               color: var(--subText);
+
+              --max-lines: 1;
+              display: -webkit-box;
+              -webkit-line-clamp: var(--max-lines);
+              -webkit-box-orient: vertical;
+              overflow: hidden;
             }
           }
 
@@ -289,6 +339,60 @@
             visibility: visible;
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .info-area img {
+    display: none !important;
+  }
+  .control-area {
+    transform: scale(0.9);
+    column-gap: 20px !important;
+  }
+  .last {
+    .volume-area {
+      #volumeBarTotal {
+        width: 50px !important;
+      }
+    }
+  }
+  #screen {
+    padding-top: 160px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .time-area {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .info-area {
+    max-width: 150px;
+  }
+  .control-area {
+    transform: scale(0.8);
+  }
+
+  .volume-area {
+    display: none !important;
+  }
+  .toggle-area {
+    transform: scale(0.8);
+  }
+  #screen {
+    display: flex !important;
+    .youtube-area {
+      display: none;
+    }
+    .playlist-area {
+      .header {
+        padding: 20px !important;
+        padding-top: 0px !important;
       }
     }
   }

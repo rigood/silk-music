@@ -44,7 +44,9 @@ export const like = async (req, res) => {
   const user = await User.findById(userId);
   const likes = user.likes;
 
-  const songs = await Song.find({ likes: { $in: likes } }).populate("likes");
+  const songs = await Song.find({ likes: { $in: likes } })
+    .populate("likes")
+    .sort({ views: "desc" });
 
   let songsWithLike = songs.map((song) => ({
     song,

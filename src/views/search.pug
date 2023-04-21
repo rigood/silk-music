@@ -6,10 +6,12 @@ include mixins/songWithAdd
 
 block content
     .center
-        h2 검색
+        h2 🔎 검색 🔍
+
         form(method="POST")
-            input(type="text" name="keyword" placeholder="제목 혹은 아티스트를 검색하세요." value=keyword required)
-            .msg * Silk-Music DB에서 곡을 검색합니다.
+            input(type="text" name="keyword" placeholder="제목 또는 아티스트 (Title or Artist)" value=keyword required)
+            .desc 🎀 Silk Music DB에서 곡을 검색합니다.
+
         .search-page
             if songs
                 .count

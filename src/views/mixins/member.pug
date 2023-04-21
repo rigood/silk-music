@@ -11,6 +11,5 @@ mixin member(member, index)
         .cover
             img(src=member.avatarUrl)
         .name=member.name
-        .email=member.email
         .points=member.points+"점"
         .createdAt=member.createdAt.toLocaleDateString("ko-KR")+" 가입"

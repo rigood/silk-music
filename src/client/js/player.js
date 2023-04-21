@@ -40,7 +40,7 @@ const bar2 = controller.querySelector("#bar2");
 const bar3 = controller.querySelector("#bar3");
 
 // 플레이리스트 선택
-const screenToggleBtn = screen.querySelector("#screenToggle");
+const screenToggleBtn = screen.querySelector("#screenToggleBtn");
 const playlist = screen.querySelector("#playlist");
 
 // 시간 변환
@@ -197,7 +197,7 @@ function updateRandomBtn() {
     randomBtn.style.color = "#ffffff";
   } else {
     randomBtn.setAttribute("data-random", "off");
-    randomBtn.style.color = "#888888";
+    randomBtn.style.color = "#808080";
   }
 }
 
@@ -209,7 +209,7 @@ function updateRepeatBtn() {
     case "off":
       repeatBtn.setAttribute("data-repeat", "off");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#888888";
+      repeatBtn.style.color = "#808080";
       break;
     case "on":
       repeatBtn.setAttribute("data-repeat", "on");
@@ -310,9 +310,8 @@ function onPlayerReady(event) {
 
   // 재생
   event.target.playVideo();
-
-  youtubeWrapper.style.opacity = 1;
-  screenToggleBtn.innerText = "영상 숨기기";
+  screenToggleBtn.style.display = "block";
+  screenToggleBtn.innerText = "유튜브 숨기기";
 }
 
 // time 업데이트
@@ -508,7 +507,7 @@ randomBtn.addEventListener("click", function (event) {
       break;
     case "on":
       randomBtn.setAttribute("data-random", "off");
-      randomBtn.style.color = "#888888";
+      randomBtn.style.color = "#808080";
       local.config.isRandom = false;
       break;
   }
@@ -537,7 +536,7 @@ repeatBtn.addEventListener("click", function (event) {
     case "one":
       repeatBtn.setAttribute("data-repeat", "off");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#888888";
+      repeatBtn.style.color = "#808080";
       local.config.repeat = "off";
       break;
   }
@@ -549,6 +548,21 @@ async function onPlayerStateChange(event, idx) {
   // ended
   if (event.data === 0) {
     playBtn.className = "fa fa-play";
+
+    // 조회수 증가
+    const youtubeId = event.target.getVideoData().video_id;
+    await (
+      await fetch(`/api/song/${youtubeId}/view`, {
+        method: "POST",
+      })
+    ).json();
+
+    // 포인트 적립 (로그인한 경우)
+    await (
+      await fetch(`/api/song/${youtubeId}/point`, {
+        method: "POST",
+      })
+    ).json();
 
     const repeat = getLocal().config.repeat;
 
@@ -573,21 +587,6 @@ async function onPlayerStateChange(event, idx) {
       playTrack(randomTrack, randomIdx);
       return;
     }
-
-    // 조회수 증가
-    const youtubeId = event.target.getVideoData().video_id;
-    await (
-      await fetch(`/api/song/${youtubeId}/view`, {
-        method: "POST",
-      })
-    ).json();
-
-    // 포인트 적립 (로그인한 경우)
-    await (
-      await fetch(`/api/song/${youtubeId}/point`, {
-        method: "POST",
-      })
-    ).json();
 
     nextBtn.click();
   }
@@ -692,18 +691,11 @@ screenToggleBtn.addEventListener("click", toggleYoutube);
 function toggleYoutube(event) {
   event.stopPropagation();
 
-  if (screenToggleBtn.innerText === "영상 숨기기") {
+  if (screenToggleBtn.innerText === "유튜브 숨기기") {
     youtubeIframe.style.visibility = "hidden";
-    youtubeWrapper.style.backgroundImage =
-      "url('/public/client/img/musicBg.jpg')";
-    youtubeWrapper.style.backgroundSize = "contain";
-    youtubeWrapper.style.opacity = 0.2;
-    screenToggleBtn.innerText = "영상 보기";
+    screenToggleBtn.innerText = "유튜브 보기";
   } else {
     youtubeIframe.style.visibility = "visible";
-    youtubeWrapper.style.backgroundImage = "none";
-    youtubeWrapper.style.backgroundSize = "unset";
-    youtubeWrapper.style.opacity = 1;
-    screenToggleBtn.innerText = "영상 숨기기";
+    screenToggleBtn.innerText = "유튜브 숨기기";
   }
 }

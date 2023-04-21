@@ -1,12 +1,15 @@
+//- songs 받음
+
 extends ../base
 include ../mixins/songWithAdd
 
 block content
     .left
-        h2 좋아요 누른 곡
+        h2 💖 좋아요 누른 곡
+        .desc="🎀 총 "+songs.length+"곡 (조회수 순으로 정렬)"
         ul
             each song, index in songs
                 +songWithAdd(song, index)
             else
-                .msg="좋아요 누른 곡이 없습니다."
+                .msg 좋아요 누른 곡이 없습니다.
 

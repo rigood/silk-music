@@ -16,7 +16,8 @@ export const postJoin = async (req, res) => {
     if (emailExists) {
       return res.status(409).render("user/join", {
         pageTitle,
-        errorMsg: "이미 가입된 이메일입니다.",
+        errorMsg: "🚫 이미 가입된 이메일입니다.",
+        email,
       });
     }
 
@@ -48,7 +49,7 @@ export const postJoin = async (req, res) => {
 
     return res.status(500).render("user/join", {
       pageTitle,
-      errorMsg: "서버 오류로 인해 회원가입에 실패했습니다.",
+      errorMsg: "🚫 서버 오류로 인해 회원가입에 실패했습니다.",
     });
   }
 };
@@ -67,7 +68,8 @@ export const postLogin = async (req, res) => {
     if (!user) {
       return res.status(401).render("user/login", {
         pageTitle,
-        errorMsg: "존재하지 않는 이메일입니다.",
+        errorMsg: "🚫 존재하지 않는 이메일입니다.",
+        email,
       });
     }
 
@@ -76,7 +78,8 @@ export const postLogin = async (req, res) => {
     if (!pwMatch) {
       return res.status(401).render("user/login", {
         pageTitle,
-        errorMsg: "비밀번호가 일치하지 않습니다.",
+        errorMsg: "🚫 비밀번호가 일치하지 않습니다.",
+        email,
       });
     }
 
@@ -93,7 +96,7 @@ export const postLogin = async (req, res) => {
 
     return res.status(500).render("", {
       pageTitle,
-      errorMsg: "서버 오류로 인해 로그인에 실패했습니다.",
+      errorMsg: "🚫 서버 오류로 인해 로그인에 실패했습니다.",
     });
   }
 };
@@ -150,7 +153,7 @@ export const postEdit = async (req, res) => {
 
     return res.status(500).render("", {
       pageTitle,
-      errorMsg: "서버 오류로 인해 실패했습니다.",
+      errorMsg: "🚫 서버 오류로 인해 실패했습니다.",
     });
   }
 };
@@ -178,7 +181,7 @@ export const postChangePw = async (req, res) => {
     if (!pwMatch) {
       return res.status(401).render("user/edit", {
         pageTitle,
-        errorMsg: "기존 비밀번호가 일치하지 않습니다.",
+        errorMsg: "🚫 기존 비밀번호가 일치하지 않습니다.",
       });
     }
 
@@ -186,7 +189,7 @@ export const postChangePw = async (req, res) => {
     if (oldPw === newPw) {
       return res.status(409).render("user/edit", {
         pageTitle,
-        errorMsg: "기존 비밀번호와 새 비밀번호가 동일합니다.",
+        errorMsg: "🚫 기존 비밀번호와 새 비밀번호가 동일합니다.",
       });
     }
 
@@ -207,7 +210,7 @@ export const postChangePw = async (req, res) => {
 
     return res.status(500).render("", {
       pageTitle,
-      errorMsg: "서버 오류로 인해 실패했습니다.",
+      errorMsg: "🚫 서버 오류로 인해 실패했습니다.",
     });
   }
 };

@@ -7,16 +7,23 @@ include ../mixins/radio
 block content
     .center
         h2 회원가입
+
+        if errorMsg
+            .errorMsg=errorMsg
+
         form(method="POST")
             .label 이메일
-            input(name="email" id="email" placeholder="이메일" type="email", required)
+            input(name="email" id="email" placeholder="Email" type="email", required value=email autofocus)
+
             .label 비밀번호
-            input(name="password" id="password" placeholder="비밀번호" type="password", required, minLength="4" maxLength="15" autocomplete="new-password")
-            .label 닉네임
-            input(name="name" id="name" placeholder="닉네임 (선택)" type="text" minLength="1" maxLength="10")
+            input(name="password" id="password" placeholder="Password (4~15 characters)" type="password", required, minLength="4" maxLength="15" autocomplete="new-password")
+
+            .label (선택) 닉네임
+            input(name="name" id="name" placeholder="(Optional) Nickname (1~10 characters)" type="text" minLength="1" maxLength="10")
+
+            .label 프로필 아바타
             .radio
                 each avatar in ["defaultAvatar","sarang","seoul","crown","red","yellowgreen"]
                     +radio(avatar, "defaultAvatar", "avatarUrl")
-            button(type="submit") 회원가입
-        if errorMsg
-            .errorMsg=errorMsg
+
+            button(type="submit") Join

@@ -295,7 +295,7 @@ export const postAddSong = async (req, res) => {
   if (songExists) {
     return res.status(409).render("add-song", {
       pageTitle,
-      errorMsg: "😂 이미 DB에 등록된 곡입니다.",
+      errorMsg: "🚫 이미 DB에 등록된 곡입니다.",
       ok: false,
     });
   }

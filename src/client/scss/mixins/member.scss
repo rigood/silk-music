@@ -1,21 +1,20 @@
 .member {
   width: 100%;
-  max-width: 1000px;
+  max-width: 768px;
   display: grid;
-  grid-template-columns: 1.5fr 70px 3fr 6fr 2fr 4fr;
+  grid-template-columns: 50px 50px 2fr 1fr 120px;
   align-items: center;
-  padding: 10px 5px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  background-color: var(--playerBg) Hover;
+  column-gap: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background-color: var(--playerBgHover);
 
-  div {
+  .rank {
     text-align: center;
   }
 
   .cover {
-    display: flex;
-    justify-content: center;
     img {
       display: block;
       width: 50px;
@@ -25,7 +24,26 @@
   }
 
   .points {
-    font-size: 24px;
+    font-size: 20px;
     color: var(--primary);
+    text-align: center;
+  }
+
+  .createdAt {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .member {
+    grid-template-columns: 50px 50px 2fr 1fr;
+    column-gap: 15px;
+    .points {
+      text-align: end;
+    }
+    .createdAt {
+      display: none;
+    }
   }
 }

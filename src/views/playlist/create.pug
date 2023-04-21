@@ -5,20 +5,21 @@ extends ../base
 
 block content
     .center
-        h2 새 플레이리스트 추가
-        form(method="POST")
-            .label 이름
-            input(name="name" id="name" placeholder="플레이리스트 이름" type="text" required)
+        h2 🌟 새 플레이리스트 🌟
 
-            .label (선택) 커버 이미지 주소
-            input(name="coverUrl" id="createCoverPreviewInput" placeholder="플레이리스트 커버 이미지 주소를 입력해주세요." type="text")
-            button(type="button")#createCoverPreviewBtn 미리보기
-
-            .label 이미지 미리보기
-            #createCoverPreview
-
-            button(type="submit") 추가하기
         if errorMsg
             .errorMsg=errorMsg
+
+        form(method="POST")
+            .label 플레이리스트 이름
+            input(name="name" id="name" placeholder="Playlist name" type="text" required)
+
+            .label (선택) 플레이리스트 커버 이미지 주소
+            input(name="coverUrl" id="createCoverPreviewInput" placeholder="(Optional) Playlist cover image url" type="text").noMarginBottom
+
+            button(type="button")#createCoverPreviewBtn.noMarginBottom 미리보기 (Preview)
+            #createCoverPreview
+
+            button(type="submit") 추가 (Add)
 
     script(src="/static/js/create.js") 

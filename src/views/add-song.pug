@@ -1,39 +1,38 @@
 extends base
 
 block content
-    .center
-        h2 곡 등록
+  .center
+    h2 🎶 노래 등록 🎶
 
-        if errorMsg
-            .error=errorMsg
+    if errorMsg
+      .errorMsg=errorMsg
 
-        form(method="POST")#addSongForm
-            .label 유튜브 영상 주소
-            input(name="youtubeUrl" id="addSongYoutubeUrlInput" placeholder="유튜브 영상 주소를 입력해주세요." type="text" required)
-            button(type="button")#addSongPreviewBtn 미리보기
+    form(method="POST")#addSongForm
+      .label 유튜브 영상 주소
+      input(name="youtubeUrl" id="addSongYoutubeUrlInput" placeholder="Enter YouTube video url here." type="text" required).noMarginBottom
 
-            .label 유튜브 영상 미리보기
-            #addSongYoutubeWrapper
-                #addSongYoutubeIframe
+      button(type="button")#addSongPreviewBtn.noMarginBottom 미리보기 (Preview)
+      #addSongYoutubeWrapper
+        #addSongYoutubeIframe
 
-            .label (자동) 유튜브 영상 ID
-            input(name="youtubeId" id="addSongYoutubeIdInput" placeholder="(자동) 유튜브 영상 ID가 입력됩니다." type="text" required readonly)
+      .label (자동 입력) 유튜브 영상 ID
+      input(name="youtubeId" id="addSongYoutubeIdInput" placeholder="YouTube video ID autocompleted" type="text" required readonly)
 
-            .label 제목
-            input(name="title" id="addSongTitleInput" placeholder="곡 제목을 입력해주세요." type="text" required autofocus)
+      .label 제목
+      input(name="title" id="addSongTitleInput" placeholder="Song Title" type="text" required autofocus)
 
-            .label 아티스트명
-            input(name="artist" id="addSongArtistInput" placeholder="아티스트명을 입력해주세요." type="text" required)
+      .label 아티스트명
+      input(name="artist" id="addSongArtistInput" placeholder="Artist" type="text" required)
 
-            .label (선택) 앨범명
-            input(name="album" id="addSongAlbumInput" placeholder="(선택) 앨범명을 입력해주세요." type="text")
+      .label (선택) 앨범명
+      input(name="album" id="addSongAlbumInput" placeholder="(Optional) Album title" type="text")
 
-            .label (선택) 발매일
-            input(name="releasedAt" id="addSongReleasedAtInput" placeholder="(선택) 곡 발매일을 입력해주세요." type="date")
+      .label (선택) 발매일
+      input(name="releasedAt" id="addSongReleasedAtInput" placeholder="(Optional) Released date" type="date")
 
-            .label (자동) 재생시간
-            input(name="playTime" id="addSongPlayTimeInput" placeholder="(자동) 곡 재생시간이 입력됩니다." type="number" required readonly)            
+      .label (자동 입력) 재생시간(초)
+      input(name="playTime" id="addSongPlayTimeInput" placeholder="Youtube video Duration autocompleted" type="number" required readonly)            
 
-            button(type="submit") 곡 등록
+      button(type="submit") 등록 (Enroll)
 
-    script(src="/static/js/addSong.js") 
+  script(src="/static/js/addSong.js") 

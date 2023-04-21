@@ -5,12 +5,11 @@
     width: 100%;
 
     .cover {
-      margin-bottom: 16px;
-
       width: 100%;
       aspect-ratio: 1 / 1;
       background-size: cover;
       background-position: center;
+      margin-bottom: 10px;
       position: relative;
       cursor: pointer;
     }
@@ -27,21 +26,23 @@
     transition: opacity 0.2s ease-in;
 
     .fa-play {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: absolute;
       bottom: 14px;
       right: 14px;
-      font-size: 14px;
-      padding: 14px;
+      width: 40px;
+      height: 40px;
       background-color: black;
-      border-radius: 50%;
       color: white;
+      border-radius: 50%;
     }
   }
 
   .info {
     .name {
-      margin-bottom: 7.5px;
-      font-size: 16px;
+      margin-bottom: 5px;
     }
 
     .count {

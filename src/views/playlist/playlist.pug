@@ -8,15 +8,23 @@ block content
         .playlist-page
             .left-col
                 img(src=playlist.coverUrl)
+
             .right-col
                 .name=playlist.name
-                .user="made by " + playlist.user.name
-                if playlist.songs.length !== 0
-                    button(data-id=playlist._id).play-all
-                        i.fa.fa-play
-                        span=playlist.songs.length+"곡 전체 재생"
-                if playlist.user._id === loggedInUser._id
-                    a(href=`/playlist/${playlist._id}/edit`) 편집
+                .user=playlist.user.name
+
+                .btns
+                    if playlist.songs.length !== 0
+                        button(data-id=playlist._id).play-all
+                            i.fa.fa-play
+                            span 전체재생
+
+                    if playlist.user._id === loggedInUser._id
+                        a(href=`/playlist/${playlist._id}/edit`)
+                            button 편집
+
+        .desc="🎀 총 "+playlist.songs.length+"곡 (조회수 순으로 정렬)"
+
         ul
             each song, index in playlist.songs
                 +songWithRemove(song, index, playlist._id, playlist.user._id)

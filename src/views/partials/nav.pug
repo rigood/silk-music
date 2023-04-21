@@ -6,8 +6,8 @@
         if loggedIn
             .user-avatar
                 img(src=loggedInUser.avatarUrl)
-            .user-email=loggedInUser.email
             .user-nickname=loggedInUser.name
+            .user-email=loggedInUser.email
             .user-menu
                 a(href="/user/edit") 프로필 수정
                 a(href="/user/logout") 로그아웃
@@ -36,7 +36,7 @@
         li(class=`${pathName==="/add-song"&&"active"}`)
             a(href="/add-song")
                 i.fa.fa-music
-                span 곡 등록
+                span 노래 등록
 
     .label PLAYLIST
     ul

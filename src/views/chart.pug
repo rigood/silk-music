@@ -5,7 +5,10 @@ include mixins/songWithAdd
 
 block content
     .left
-        h2 인기 차트
+        h2 📈 인기 차트
+        .desc 🎀 조회수 기준으로 작성되었습니다.
         ul
             each song, index in songs
                 +songWithAdd(song, index)
+            else
+                .msg="차트에 등록된 곡이 없습니다."

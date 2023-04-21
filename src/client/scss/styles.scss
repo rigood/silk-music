@@ -78,14 +78,28 @@ body {
   }
 }
 
+main {
+  margin-left: 240px;
+  padding: 60px 50px 120px;
+}
+
+@media screen and (max-width: 1024px) {
+  main {
+    padding: 60px 25px 120px;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+button {
+  font-family: "Pretendard-Regular";
+  font-size: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 input:-webkit-autofill,
@@ -106,9 +120,4 @@ input:autofill:active {
   -webkit-box-shadow: 0 0 0px 1000px #fff inset;
   box-shadow: 0 0 0px 1000px #fff inset;
   transition: background-color 5000s ease-in-out 0s;
-}
-
-main {
-  margin-left: 240px;
-  padding: 60px 50px 120px;
 }
