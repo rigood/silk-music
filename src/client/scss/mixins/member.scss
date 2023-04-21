@@ -1,11 +1,11 @@
 .member {
   width: 100%;
-  max-width: 768px;
+  max-width: 840px;
   display: grid;
-  grid-template-columns: 50px 50px 2fr 1fr 120px;
+  grid-template-columns: 70px 50px 2fr 1fr 120px;
   align-items: center;
   column-gap: 20px;
-  padding: 10px;
+  padding: 10px 20px;
   margin-bottom: 20px;
   border-radius: 12px;
   background-color: var(--playerBgHover);
@@ -23,6 +23,10 @@
     }
   }
 
+  .name {
+    font-size: 16px;
+  }
+
   .points {
     font-size: 20px;
     color: var(--primary);
@@ -37,7 +41,7 @@
 
 @media screen and (max-width: 640px) {
   .member {
-    grid-template-columns: 50px 50px 2fr 1fr;
+    grid-template-columns: 70px 50px 2fr 1fr;
     column-gap: 15px;
     .points {
       text-align: end;

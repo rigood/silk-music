@@ -22,7 +22,7 @@
 
   form {
     width: 100%;
-    max-width: 360px;
+    max-width: 420px;
     display: flex;
     flex-direction: column;
 
@@ -48,6 +48,7 @@
       padding: 12px;
       border-radius: 8px;
       margin-bottom: 30px;
+      font-size: 16px;
 
       &::placeholder {
         font-family: inherit;
