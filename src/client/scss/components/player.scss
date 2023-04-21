@@ -6,7 +6,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 9997;
+    z-index: 9995;
 
     height: 80px;
     background-color: var(--playerBg);
@@ -39,7 +39,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 9998;
+        z-index: 9996;
         padding: 3px 6px;
         border-radius: 2px;
         background-color: white;
@@ -198,7 +198,7 @@
     bottom: 80px;
     left: 0;
     right: 0;
-    z-index: 9996;
+    z-index: 9994;
 
     visibility: hidden;
     opacity: 0;
@@ -392,7 +392,6 @@
     .playlist-area {
       .header {
         padding: 20px !important;
-        padding-top: 0px !important;
       }
     }
   }

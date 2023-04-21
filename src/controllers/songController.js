@@ -54,7 +54,9 @@ export const home = async (req, res) => {
   }
 
   // 추천 플레이리스트
-  const recommendedPlaylists = await Playlist.find({}).populate("user");
+  const recommendedPlaylists = await Playlist.find({
+    user: "6440f301e7c3b7001452611d",
+  }).populate("user");
 
   return res.render("home", {
     pageTitle: "홈",
@@ -68,7 +70,8 @@ export const chart = async (req, res) => {
   // 조회수, 발매일 기준 정렬 후 노래 목록 반환
   const songs = await Song.find({})
     .sort({ views: "desc", releasedAt: "desc" })
-    .populate("likes");
+    .populate("likes")
+    .limit(30);
 
   // 로그인 되어있으면, 좋아요 여부 표시하여 노래 목록 반환
   const userId = req.session?.user?._id;

@@ -99,6 +99,16 @@
         object-fit: cover;
       }
     }
+
+    @media screen and (max-width: 640px) {
+      .left-col {
+        img {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+
     .right-col {
       padding-top: 5px;
 

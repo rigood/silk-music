@@ -136,7 +136,7 @@
   padding: 20px 30px;
 
   display: none;
-  z-index: 9999;
+  z-index: 9997;
 
   .logo {
     font-family: "Pacifico", cursive;
@@ -155,7 +155,7 @@
   position: fixed;
   top: 15px;
   left: 15px;
-  z-index: 9999;
+  z-index: 9997;
   cursor: pointer;
 }
 
@@ -174,7 +174,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    z-index: 9999;
+    z-index: 9997;
 
     #navCloseBtn {
       display: flex;
