@@ -194,10 +194,10 @@ function updateRandomBtn() {
 
   if (isRandom) {
     randomBtn.setAttribute("data-random", "on");
-    randomBtn.style.color = "#ffffff";
+    randomBtn.style.color = "#f6c2ce";
   } else {
     randomBtn.setAttribute("data-random", "off");
-    randomBtn.style.color = "#808080";
+    randomBtn.style.color = "#4b4b4b";
   }
 }
 
@@ -209,17 +209,17 @@ function updateRepeatBtn() {
     case "off":
       repeatBtn.setAttribute("data-repeat", "off");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#808080";
+      repeatBtn.style.color = "#4b4b4b";
       break;
     case "on":
       repeatBtn.setAttribute("data-repeat", "on");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#ffffff";
+      repeatBtn.style.color = "#f6c2ce";
       break;
     case "one":
       repeatBtn.setAttribute("data-repeat", "one");
       repeatBtn.className = "fa fa-1";
-      repeatBtn.style.color = "#ffffff";
+      repeatBtn.style.color = "#f6c2ce";
       break;
   }
 }
@@ -502,12 +502,12 @@ randomBtn.addEventListener("click", function (event) {
   switch (randomBtn.dataset.random) {
     case "off":
       randomBtn.setAttribute("data-random", "on");
-      randomBtn.style.color = "#ffffff";
+      randomBtn.style.color = "#f6c2ce";
       local.config.isRandom = true;
       break;
     case "on":
       randomBtn.setAttribute("data-random", "off");
-      randomBtn.style.color = "#808080";
+      randomBtn.style.color = "#4b4b4b";
       local.config.isRandom = false;
       break;
   }
@@ -524,19 +524,19 @@ repeatBtn.addEventListener("click", function (event) {
     case "off":
       repeatBtn.setAttribute("data-repeat", "on");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#ffffff";
+      repeatBtn.style.color = "#f6c2ce";
       local.config.repeat = "on";
       break;
     case "on":
       repeatBtn.setAttribute("data-repeat", "one");
       repeatBtn.className = "fa fa-1";
-      repeatBtn.style.color = "#ffffff";
+      repeatBtn.style.color = "#f6c2ce";
       local.config.repeat = "one";
       break;
     case "one":
       repeatBtn.setAttribute("data-repeat", "off");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#808080";
+      repeatBtn.style.color = "#4b4b4b";
       local.config.repeat = "off";
       break;
   }
