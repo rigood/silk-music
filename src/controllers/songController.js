@@ -13,7 +13,7 @@ export const home = async (req, res) => {
   // 최신음악 (발매일, 조회수 기준 정렬)
   const latestSongs = await Song.find({})
     .sort({ releasedAt: "desc", views: "asc" })
-    .limit(9)
+    .limit(8)
     .populate("likes");
 
   // 로그인 되어있으면, 좋아요 여부 표시하여 최신음악 반환
