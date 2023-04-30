@@ -1,5 +1,5 @@
 import "regenerator-runtime";
-import defaultTracks from "../defaultTracks.json";
+import defaultTracks from "../data/defaultTracks.json";
 
 const APP_KEY = "silk_music";
 const APP_VOLUME = "silk_music_volume";

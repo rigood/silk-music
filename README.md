@@ -1,16 +1,43 @@
-# Melon Contest Blueprint
+# 🎀 Silk Music (실크 뮤직)
 
-## How to run?
+데스크탑, 모바일 목업 이미지 삽입 예정
 
-- Open this folder on VSCode.
-- Click on `View` -> `Terminal`.
-- Run `npm i`.
-- Start `mongodb`.
-- Change the `COOKIE_SECRET` on the `.env` file.
-- Run `npm run dev:server`.
-- Open another terminal and run `npm run dev:assets`.
+</br>
 
-## How to deploy?
+> [🚀 Silk Music 바로가기](https://silk-music.herokuapp.com/)
+>
+> 테스트 계정
+>
+> - 이메일: `test@naver.com`
+> - 비밀번호: `test1234`
 
-- Run `npm run build`.
-- Run `npm start`.
+</br>
+
+## 1. 서비스 소개
+
+**실크미성 가수 진욱 님을 응원하는 뮤직 플랫폼입니다.**
+
+- 뮤직 플레이어를 통해 오디오와 유튜브 영상을 오가며 음악을 감상할 수 있습니다.
+- 가수 진욱 님의 노래 재생 시 포인트를 획득할 수 있습니다.
+- 좋아하는 음악들로 플레이리스트를 만들어 관리할 수 있습니다.
+- 인기 차트, 검색을 통해 원하는 음악을 탐색하고, 유튜브 url을 통해 곡을 등록할 수 있습니다.
+
+</br>
+
+## 2. 기술 스택
+
+- Front-end: HTML, SCSS, JavaScript
+- Back-end: Node.js, Pug, MongoDB
+- Deploy: Heroku
+
+</br>
+
+## 3. 개발 일정
+
+- 1인 프로젝트
+- 기획: 2023-03-31 ~ 2023-04-03
+- 개발: 2023-04-04 ~ 2023-04-22
+
+</br>
+
+## 4. 주요 기능
