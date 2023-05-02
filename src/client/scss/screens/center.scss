@@ -12,7 +12,7 @@
     line-height: 1.3;
   }
 
-  // join, login, playlist/create, playlist/edit
+  // join, login, user/edit, upload-song, playlist/create, playlist/edit
   .errorMsg {
     font-size: 14px;
     color: var(--primary);
@@ -35,7 +35,7 @@
     }
 
     // user/join, user/login, user/edit
-    // add-song
+    // upload-song
     // playlist/create, playlist/edit
     .label {
       margin-bottom: 10px;
@@ -99,10 +99,15 @@
         color: var(--primary);
       }
     }
+
+    // 검색 결과가 없을 때 문구
+    .msg {
+      padding: 10px;
+    }
   }
 
-  // add-song 유튜브 영상 미리보기
-  #addSongYoutubeWrapper {
+  // upload-song 유튜브 영상 미리보기
+  #uploadSongYoutubeWrapper {
     position: relative;
     width: 100%;
     height: 0;
@@ -112,7 +117,7 @@
     background-color: var(--playerBgHover);
     overflow: hidden;
 
-    #addSongYoutubeIframe {
+    #uploadSongYoutubeIframe {
       width: 100%;
       height: 100%;
       position: absolute;
@@ -122,9 +127,8 @@
   }
 
   // playlist/create 커버 이미지 미리보기
-  // playlist/:id/edit 커버 이미지 미리보기
-  #createCoverPreview,
-  #editCoverPreview {
+  // playlist/:playlistId/edit 커버 이미지 미리보기
+  #coverPreview {
     width: 100%;
     aspect-ratio: 1 / 1;
     background-color: var(--playerBgHover);

@@ -551,18 +551,16 @@ async function onPlayerStateChange(event, idx) {
 
     // 조회수 증가
     const youtubeId = event.target.getVideoData().video_id;
-    await (
-      await fetch(`/api/song/${youtubeId}/view`, {
-        method: "POST",
-      })
-    ).json();
+
+    await fetch(`/api/song/${youtubeId}/view`, {
+      method: "POST",
+    });
 
     // 포인트 적립 (로그인한 경우)
-    await (
-      await fetch(`/api/song/${youtubeId}/point`, {
-        method: "POST",
-      })
-    ).json();
+
+    await fetch(`/api/song/${youtubeId}/point`, {
+      method: "POST",
+    });
 
     const repeat = getLocal().config.repeat;
 
@@ -612,8 +610,8 @@ if (playBtns) {
 async function playSongOnPlayer(event) {
   event.stopPropagation();
 
-  const id = event.currentTarget.parentElement.dataset.id;
-  const result = await (await fetch(`/api/song/${id}`)).json();
+  const songId = event.currentTarget.parentElement.dataset.id;
+  const result = await (await fetch(`/api/song/${songId}`)).json();
 
   if (result.ok) {
     let local = getLocal();

@@ -19,17 +19,17 @@ window.addEventListener("click", (e) => {
   e.target === modal ? hideModal() : false;
 });
 
-// 플레이리스트에 곡 추가 요소 선택
+// 플레이리스트에 곡 추가 버튼 선택
 const addBtns = document.querySelectorAll(".add");
 addBtns.forEach((addBtn) =>
   addBtn.addEventListener("click", showMyPlaylistsInModal)
 );
 
-// 모달에 내 플레이리스트 목록 표시
+// 모달에 플레이리스트 목록 표시
 async function showMyPlaylistsInModal(event) {
   const songId = event.currentTarget.parentElement.dataset.id;
 
-  const result = await (await fetch("/playlist/add")).json();
+  const result = await (await fetch("/api/playlist/add-song")).json();
 
   if (result.ok) {
     showModal("내 플레이리스트에 추가");
@@ -70,7 +70,7 @@ function makePlaylistsInModal(playlist, songId) {
 // 플레이리스트에 곡 추가 처리
 async function addSongToPlaylist(playlist, songId) {
   const result = await (
-    await fetch("/playlist/add", {
+    await fetch("/api/playlist/add-song", {
       method: "POST",
       body: JSON.stringify({
         playlistId: playlist._id,
@@ -93,7 +93,7 @@ async function addSongToPlaylist(playlist, songId) {
   }
 }
 
-// 플레이리스트로부터 곡 제거 요소 선택
+// 플레이리스트로부터 곡 제거 버튼 선택
 const removeBtns = document.querySelectorAll(".remove");
 removeBtns.forEach((removeBtn) =>
   removeBtn.addEventListener("click", removeSongFromPlaylist)
@@ -105,7 +105,7 @@ async function removeSongFromPlaylist(event) {
   const songId = event.currentTarget.parentElement.dataset.id;
 
   const result = await (
-    await fetch("/playlist/remove", {
+    await fetch("/api/playlist/remove-song", {
       method: "POST",
       body: JSON.stringify({
         playlistId,

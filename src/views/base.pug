@@ -12,20 +12,26 @@ html(lang="ko")
 
         link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
         link(rel="stylesheet" href="/static/css/styles.css")
-        meta(name="theme-color" content="#ffffff")
+
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible' content='IE=edge')
-        meta(name='description' content='Some description')
         meta(name='viewport' content='width=device-width, initial-scale=1')
+
+        meta(property='og:title' content='Silk Music')
+        meta(property='og:url' content='https://silk-music.herokuapp.com')
+        meta(property='og:type' content='website')
+        meta(property='og:image' content='')
+        meta(property='og:description' content='실크미성 가수 진욱 님을 응원하는 뮤직 플랫폼')
 
     body
         if messages.ok
             +message("ok", messages.ok)
         if messages.error
             +message("error", messages.error)
+        if messages.warning
+            +message("warning", messages.warning)
 
         include partials/miniNav
-
         include partials/nav
 
         i#toggleThemeBtn      
@@ -42,5 +48,3 @@ html(lang="ko")
 
     script(src="https://www.youtube.com/iframe_api")
     script(src="/static/js/main.js")
-
-    block scripts

@@ -28,8 +28,8 @@
     line-height: 1.5;
   }
 
-  // chart, playlist/like, playlist/:id
-  // 수록된 곡이 없을 때 문구
+  // rank, chart, playlist/like, playlist/:playlistId
+  // 대상자, 수록된 곡이 없을 때 문구
   .msg {
     padding: 10px;
   }

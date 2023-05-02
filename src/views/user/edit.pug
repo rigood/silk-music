@@ -23,7 +23,6 @@ block content
             button(type="submit") 수정 (Edit)
 
         form(method="POST" action="/user/change-pw")
-
             .label 기존 비밀번호
             input(name="oldPw" id="oldPw" placeholder="Old password (4~15 characters)" type="password", required, minLength="4" maxLength="15" autocomplete="new-password")
 

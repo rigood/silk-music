@@ -2,8 +2,9 @@ import "regenerator-runtime";
 import "../scss/styles.scss";
 import "./player.js";
 import "./playlist.js";
-import "./like.js";
+import "./toggleSongLike.js";
 
+// 다크모드, 라이트모드 토글버튼
 const toggleThemeBtn = document.getElementById("toggleThemeBtn");
 toggleThemeBtn.addEventListener("click", toggleTheme);
 
@@ -19,6 +20,7 @@ function toggleTheme(event) {
   }
 }
 
+// 반응형 Nav 열고 닫기
 const toggleNavBtn = document.getElementById("toggleNavBtn");
 toggleNavBtn.addEventListener("click", toggleNav);
 const nav = document.querySelector(".nav");

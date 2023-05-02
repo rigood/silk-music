@@ -8,24 +8,20 @@ block content
             .errorMsg=errorMsg
 
         form(method="POST")
-
-
             .label 플레이리스트 이름
             input(name="name" id="name" placeholder="Playlist name" type="text" required value=playlist.name)
 
             .label (선택) 플레이리스트 커버 이미지 주소
-            input(name="coverUrl" id="editCoverPreviewInput" placeholder="(Optional) Playlist cover image url" type="text" value=playlist.coverUrl).noMarginBottom
+            input(name="coverUrl" id="coverPreviewInput" placeholder="(Optional) Playlist cover image url" type="text" value=playlist.coverUrl).noMarginBottom
 
-            button(type="button")#editCoverPreviewBtn.noMarginBottom 미리보기 (Preview)
-            #editCoverPreview
+            button(type="button")#coverPreviewBtn.noMarginBottom 미리보기 (Preview)
+            #coverPreview
                 img(src=playlist.coverUrl)
 
             button(type="submit") 수정 (Edit)
 
+        form(method="POST" action=`/playlist/${playlist._id}/delete`)
             .label 💥 플레이리스트 삭제 💥
-            button(type="button" data-id=playlist._id)#deletePlaylistBtn.noMarginTop 삭제하기
+            button(type="submit").noMarginTop 삭제하기
 
-
-
-
-    script(src="/static/js/edit.js") 
+    script(src="/static/js/coverPreview.js") 

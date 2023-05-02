@@ -4,8 +4,8 @@ import {
   chart,
   getSearch,
   postSearch,
-  getAddSong,
-  postAddSong,
+  getUploadSong,
+  postUploadSong,
 } from "../controllers/songController";
 import {
   getJoin,
@@ -24,7 +24,7 @@ rootRouter.route("/chart").get(chart);
 
 rootRouter.route("/search").get(getSearch).post(postSearch);
 
-rootRouter.route("/add-song").get(getAddSong).post(postAddSong);
+rootRouter.route("/upload-song").get(getUploadSong).post(postUploadSong);
 
 rootRouter.route("/join").all(publicOnlyMiddleware).get(getJoin).post(postJoin);
 

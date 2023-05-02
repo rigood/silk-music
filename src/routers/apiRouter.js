@@ -1,22 +1,35 @@
 import express from "express";
 import {
-  getSong,
   toggleSongLike,
-  registerView,
-  getPoint,
+  updateSongView,
+  addPoint,
+  getSong,
 } from "../controllers/songController";
-import { getPlaylistSongs } from "../controllers/playlistController";
+import {
+  getAddSongToPlaylist,
+  postAddSongToPlaylist,
+  postRemoveSongFromPlaylist,
+} from "../controllers/playlistController";
+import { privateOnlyMiddleware } from "../middlewares";
 
 const apiRouter = express.Router();
 
-apiRouter.route("/song/:id([0-9a-f]{24})").get(getSong);
-
-apiRouter.route("/playlist/:id([0-9a-f]{24})").get(getPlaylistSongs);
-
 apiRouter.route("/song/:songId([0-9a-f]{24})/like").post(toggleSongLike);
 
-apiRouter.route("/song/:youtubeId/view").post(registerView);
+apiRouter.route("/song/:youtubeId/view").post(updateSongView);
 
-apiRouter.route("/song/:youtubeId/point").post(getPoint);
+apiRouter.route("/song/:youtubeId/point").post(addPoint);
+
+apiRouter.route("/song/:songId([0-9a-f]{24})").get(getSong);
+
+apiRouter
+  .route("/playlist/add-song")
+  .get(getAddSongToPlaylist)
+  .post(postAddSongToPlaylist);
+
+apiRouter
+  .route("/playlist/remove-song")
+  .all(privateOnlyMiddleware)
+  .post(postRemoveSongFromPlaylist);
 
 export default apiRouter;

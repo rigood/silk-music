@@ -1,6 +1,3 @@
-//- name, coverUrl(optional)
-//- errorMsg (500 서버 에러)
-
 extends ../base
 
 block content
@@ -15,11 +12,11 @@ block content
             input(name="name" id="name" placeholder="Playlist name" type="text" required)
 
             .label (선택) 플레이리스트 커버 이미지 주소
-            input(name="coverUrl" id="createCoverPreviewInput" placeholder="(Optional) Playlist cover image url" type="text").noMarginBottom
+            input(name="coverUrl" id="coverPreviewInput" placeholder="(Optional) Playlist cover image url" type="text").noMarginBottom
 
-            button(type="button")#createCoverPreviewBtn.noMarginBottom 미리보기 (Preview)
-            #createCoverPreview
+            button(type="button")#coverPreviewBtn.noMarginBottom 미리보기 (Preview)
+            #coverPreview
 
             button(type="submit") 추가 (Add)
 
-    script(src="/static/js/create.js") 
+    script(src="/static/js/coverPreview.js") 

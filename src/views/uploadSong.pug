@@ -1,0 +1,38 @@
+extends base
+
+block content
+  .center
+    h2 🎶 노래 등록 🎶
+
+    if errorMsg
+      .errorMsg=errorMsg
+
+    form(method="POST")#uploadSongForm
+      .label 유튜브 영상 주소
+      input(name="youtubeUrl" id="uploadSongYoutubeUrlInput" placeholder="Enter YouTube video url here." type="text" value=youtubeUrl required).noMarginBottom
+
+      button(type="button")#uploadSongPreviewBtn.noMarginBottom 미리보기 (Preview)
+      #uploadSongYoutubeWrapper
+        #uploadSongYoutubeIframe
+
+      .label (자동 입력) 유튜브 영상 ID
+      input(name="youtubeId" id="uploadSongYoutubeIdInput" placeholder="YouTube video ID autocompleted" type="text" value=youtubeId required readonly)
+
+      .label 제목
+      input(name="title" id="uploadSongTitleInput" placeholder="Song Title" type="text" value=title required)
+
+      .label 아티스트명
+      input(name="artist" id="uploadSongArtistInput" placeholder="Artist" type="text" value=artist required)
+
+      .label (선택) 앨범명
+      input(name="album" id="uploadSongAlbumInput" placeholder="(Optional) Album title" type="text" value=album)
+
+      .label (선택) 발매일
+      input(name="releasedAt" id="uploadSongReleasedAtInput" placeholder="(Optional) Released date" type="date" value=releasedAt)
+
+      .label (자동 입력) 재생시간(초)
+      input(name="playTime" id="uploadSongPlayTimeInput" placeholder="Youtube video Duration autocompleted" type="number" value=playTime required readonly)            
+
+      button(type="submit") 등록 (Enroll)
+
+  script(src="/static/js/uploadSong.js") 

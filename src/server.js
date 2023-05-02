@@ -1,4 +1,5 @@
 import express from "express";
+import "express-async-errors";
 import morgan from "morgan";
 import session from "express-session";
 import MongoStore from "connect-mongo";
@@ -34,7 +35,6 @@ app.use(flash());
 
 app.use(localsMiddleware);
 
-app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
 app.use("/public", express.static("src"));
 
@@ -42,5 +42,20 @@ app.use("/", rootRouter);
 app.use("/user", userRouter);
 app.use("/playlist", playlistRouter);
 app.use("/api", apiRouter);
+
+app.use(function (req, res, next) {
+  res.status(404).render("error", {
+    pageTitle: "에러",
+    message: "페이지를 찾을 수 없습니다.",
+  });
+});
+
+app.use(function (err, req, res, next) {
+  console.error(`💥 에러 발생 \n ${err.stack}`);
+  res.status(500).render("error", {
+    pageTitle: "오류",
+    message: "서버 오류가 발생하였습니다.",
+  });
+});
 
 export default app;

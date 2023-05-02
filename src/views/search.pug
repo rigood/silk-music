@@ -20,3 +20,5 @@ block content
                 ul
                     each song, index in songs
                         +songWithAdd(song, index)
+                    else
+                        .msg="검색 결과가 없습니다."

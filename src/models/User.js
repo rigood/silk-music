@@ -6,21 +6,22 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true, minLength: 4 },
   name: {
     type: String,
+    required: true,
     minLength: 1,
     maxLength: 10,
     default: function () {
-      if (this.email) {
-        return this.email.split("@")[0].substring(0, 10);
-      } else {
-        return "익명";
-      }
+      return this.email.split("@")[0].substring(0, 10);
     },
   },
   avatarUrl: { type: String, required: true },
-  points: { type: Number, default: 0 },
+  points: { type: Number, required: true, default: 0 },
   createdAt: { type: Date, required: true, default: Date.now },
-  playlists: [{ type: mongoose.Schema.Types.ObjectId, ref: "Playlist" }],
-  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
+  playlists: [
+    { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Playlist" },
+  ],
+  likes: [
+    { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Like" },
+  ],
 });
 
 userSchema.pre("save", async function () {

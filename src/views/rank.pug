@@ -10,3 +10,5 @@ block content
         ul
             each member, index in members
                 +member(member, index)
+            else
+                .msg="대상자가 없습니다."

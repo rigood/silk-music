@@ -1,43 +1,39 @@
 import express from "express";
 import {
-  like,
-  my,
-  playlist,
-  getEdit,
-  postEdit,
-  postDelete,
-  getCreate,
-  postCreate,
-  getAdd,
-  postAdd,
-  postRemove,
+  likedPlaylist,
+  myPlaylist,
+  playlistPage,
+  getCreatePlaylist,
+  postCreatePlaylist,
+  getEditPlaylist,
+  postEditPlaylist,
+  postDeletePlaylist,
 } from "../controllers/playlistController";
 import { privateOnlyMiddleware } from "../middlewares";
 
 const playlistRouter = express.Router();
 
-playlistRouter.route("/like").all(privateOnlyMiddleware).get(like);
+playlistRouter.route("/like").all(privateOnlyMiddleware).get(likedPlaylist);
 
-playlistRouter.route("/my").all(privateOnlyMiddleware).get(my);
+playlistRouter.route("/my").all(privateOnlyMiddleware).get(myPlaylist);
 
-playlistRouter.route("/:id([0-9a-f]{24})").get(playlist);
-
-playlistRouter
-  .route("/:id([0-9a-f]{24})/edit")
-  .all(privateOnlyMiddleware)
-  .get(getEdit)
-  .post(postEdit);
-
-playlistRouter.route("/delete").all(privateOnlyMiddleware).post(postDelete);
+playlistRouter.route("/:playlistId([0-9a-f]{24})").get(playlistPage);
 
 playlistRouter
   .route("/create")
   .all(privateOnlyMiddleware)
-  .get(getCreate)
-  .post(postCreate);
+  .get(getCreatePlaylist)
+  .post(postCreatePlaylist);
 
-playlistRouter.route("/add").get(getAdd).post(postAdd);
+playlistRouter
+  .route("/:playlistId([0-9a-f]{24})/edit")
+  .all(privateOnlyMiddleware)
+  .get(getEditPlaylist)
+  .post(postEditPlaylist);
 
-playlistRouter.route("/remove").all(privateOnlyMiddleware).post(postRemove);
+playlistRouter
+  .route("/:playlistId([0-9a-f]{24})/delete")
+  .all(privateOnlyMiddleware)
+  .post(postDeletePlaylist);
 
 export default playlistRouter;
