@@ -1,6 +1,3 @@
-//- keyword
-//- keyword, songs, count 받음
-
 extends base
 include mixins/songWithAdd
 
@@ -9,7 +6,7 @@ block content
         h2 🔎 검색 🔍
 
         form(method="POST")
-            input(type="text" name="keyword" placeholder="제목 또는 아티스트 (Title or Artist)" value=keyword required)
+            input(type="search" name="keyword" placeholder="제목 또는 아티스트 (Title or Artist)" value=keyword required)
             .desc 🎀 Silk Music DB에서 곡을 검색합니다.
 
         .search-page
