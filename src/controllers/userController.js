@@ -85,13 +85,21 @@ export const postLogin = async (req, res) => {
 export const rank = async (req, res) => {
   const pageTitle = "스트리밍 랭킹";
 
-  // 포인트, 가입일 순으로 정렬
-  const members = await User.find({}).sort({
-    points: "desc",
-    createdAt: "desc",
-  });
+  const page = Number(req.query.page) || 1;
+  const perPage = 10;
+  const total = await User.countDocuments({});
+  const totalPage = Math.ceil(total / perPage);
 
-  return res.render("rank", { pageTitle, members });
+  // 포인트, 가입일 순으로 정렬
+  const members = await User.find({})
+    .sort({
+      points: "desc",
+      createdAt: "desc",
+    })
+    .skip(perPage * (page - 1))
+    .limit(perPage);
+
+  return res.render("rank", { pageTitle, page, perPage, totalPage, members });
 };
 
 export const logout = (req, res) => {

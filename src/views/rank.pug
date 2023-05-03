@@ -9,6 +9,10 @@ block content
             div 🎀 동점일 경우, 가입일이 최근일수록 높은 순위 부여
         ul
             each member, index in members
-                +member(member, index)
+                +member(member, index, page, perPage)
             else
                 .msg="대상자가 없습니다."
+        if(members.length )
+        .pagination
+            - for (var i=0; i < totalPage; i++)
+                a(href=`/rank?page=${i+1}` class=`${page===i+1 && "active"}`)=i+1

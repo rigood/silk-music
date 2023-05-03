@@ -7,7 +7,7 @@
     margin-bottom: 45px;
     font-size: 45px;
     font-weight: bold;
-    white-space: nowrap;
+    white-space: pre-wrap;
   }
 
   // home
@@ -26,6 +26,24 @@
     margin-bottom: 30px;
     padding-left: 10px;
     line-height: 1.5;
+  }
+
+  // rank 페이지네이션
+  .pagination {
+    width: 100%;
+    max-width: 840px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    justify-content: center;
+    margin: 20px 0;
+    a {
+      padding: 10px;
+      cursor: pointer;
+      &.active {
+        color: var(--primary);
+      }
+    }
   }
 
   // rank, chart, playlist/like, playlist/:playlistId

@@ -1,13 +1,14 @@
-mixin member(member, index)
+mixin member(member, index, page, perPage)
+    - const rank = (page -1) * perPage + index + 1
     .member
         .rank
-            if index===0
+            if rank===1
                 span="🥇 "
-            if index===1
+            if rank===2
                 span="🥈 "
-            if index===2
+            if rank===3
                 span="🥉 "
-            span=index+1+"위"
+            span=rank+"위"
         .cover
             img(src=member.avatarUrl)
         .name=member.name
