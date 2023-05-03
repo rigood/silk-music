@@ -31,7 +31,7 @@ async function toggleSongLike(event) {
     }
   }
 
-  if (!result.ok) {
+  if (!result.ok && result.errorMsg) {
     alert(result.errorMsg);
   }
 }

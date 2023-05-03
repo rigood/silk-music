@@ -45,7 +45,7 @@ async function showMyPlaylistsInModal(event) {
     );
   }
 
-  if (!result.ok) {
+  if (!result.ok && result.errorMsg) {
     alert(result.errorMsg);
   }
 }
