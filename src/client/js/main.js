@@ -12,10 +12,12 @@ function toggleTheme(event) {
   if (event.target.className === "fa fa-sun") {
     document.documentElement.setAttribute("data-theme", "light");
     toggleThemeBtn.className = "fa fa-moon";
+    toggleThemeBtn.title = "다크모드로 전환";
     localStorage.setItem("silk_music_theme", "light");
   } else if (event.target.className === "fa fa-moon") {
     document.documentElement.setAttribute("data-theme", "dark");
     toggleThemeBtn.className = "fa fa-sun";
+    toggleThemeBtn.title = "라이트모드로 전환";
     localStorage.setItem("silk_music_theme", "dark");
   }
 }
