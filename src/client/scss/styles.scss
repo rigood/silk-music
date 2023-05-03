@@ -1,6 +1,5 @@
 // Config
 @import "./config/_reset.scss";
-@import "./config/_variables.scss";
 
 // Components
 @import "./components/nav.scss";
@@ -9,10 +8,10 @@
 @import "./components/message.scss";
 
 // Mixins
-@import "./mixins/radio.scss";
 @import "./mixins/song.scss";
-@import "./mixins/playlist.scss";
 @import "./mixins/youtube.scss";
+@import "./mixins/playlist.scss";
+@import "./mixins/radio.scss";
 @import "./mixins/member.scss";
 
 // Screens
@@ -20,7 +19,6 @@
 @import "./screens/left.scss";
 
 // Fonts
-
 // 1. 본문 적용 폰트
 @font-face {
   font-family: "Pretendard-Regular";
@@ -37,7 +35,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 // Defaults
-
 * {
   box-sizing: border-box;
 }
@@ -78,7 +75,6 @@ body {
   font-family: "Pretendard-Regular";
   font-size: 18px;
   color: var(--text);
-
   background-color: var(--bg);
 
   &.scrollHide {
@@ -89,6 +85,10 @@ body {
 main {
   margin-left: 240px;
   padding: 60px 50px 120px;
+
+  #kakaoAdfit {
+    margin-top: 20px;
+  }
 }
 
 @media screen and (max-width: 1024px) {
