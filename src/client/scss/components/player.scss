@@ -13,7 +13,6 @@
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    justify-content: space-between;
     align-items: center;
     column-gap: 10px;
 
@@ -276,7 +275,7 @@
         li {
           display: flex;
           align-items: center;
-          padding: 10px 20px;
+          padding: 10px 10px 10px 20px;
           cursor: pointer;
 
           &:hover {
@@ -287,6 +286,9 @@
             background-color: var(--nowPlaying);
             &:hover {
               background-color: var(--nowPlaying);
+            }
+            i {
+              display: none;
             }
           }
 
@@ -329,6 +331,7 @@
 
           i {
             visibility: hidden;
+            margin-left: 5px;
             padding: 10px;
             cursor: pointer;
           }
@@ -337,6 +340,17 @@
             visibility: visible;
           }
         }
+      }
+    }
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #playlist {
+    li {
+      i {
+        visibility: visible !important;
+        opacity: 0.3;
       }
     }
   }
@@ -369,27 +383,30 @@
 }
 
 @media screen and (max-width: 640px) {
-  .info-area {
-    max-width: 150px;
-  }
-  .control-area {
-    transform: scale(0.8);
+  #controller {
+    grid-template-columns: auto 1fr 30px !important;
+
+    .control-area {
+      transform: scale(0.8);
+    }
+
+    .volume-area {
+      display: none !important;
+    }
+    .toggle-area {
+      transform: scale(0.8);
+    }
   }
 
-  .volume-area {
-    display: none !important;
-  }
-  .toggle-area {
-    transform: scale(0.8);
-  }
   #screen {
     display: flex !important;
+
     .youtube-area {
       display: none;
     }
     .playlist-area {
       .header {
-        padding: 20px !important;
+        padding: 10px 20px 20px !important;
       }
     }
   }
