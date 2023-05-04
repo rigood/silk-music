@@ -4,8 +4,8 @@
   align-items: center;
   padding: 15px 0;
 
-  &:hover {
-    @media (hover: hover) {
+  @media (hover: hover) {
+    &:hover {
       background-color: var(--playerBgHover);
     }
   }
@@ -45,8 +45,8 @@
       }
     }
 
-    &:hover .overlay {
-      @media (hover: hover) {
+    @media (hover: hover) {
+      &:hover .overlay {
         opacity: 1;
       }
     }
@@ -172,8 +172,8 @@
       }
     }
 
-    &:hover .overlay {
-      @media (hover: hover) {
+    @media (hover: hover) {
+      &:hover .overlay {
         opacity: 1;
       }
     }
@@ -222,10 +222,10 @@
     color: var(--primary);
   }
 
-  &:hover .play i,
-  &:hover .add i,
-  &:hover .like i {
-    @media (hover: hover) {
+  @media (hover: hover) {
+    &:hover .play i,
+    &:hover .add i,
+    &:hover .like i {
       visibility: visible;
     }
   }

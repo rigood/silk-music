@@ -20,21 +20,29 @@
 
   @media screen and (max-width: 1024px) {
     h2 {
-      font-size: 32px;
+      margin-bottom: 28px;
+      font-size: 28px;
     }
     h3 {
       font-size: 24px;
     }
   }
 
+  // chart, playlist/like
   // rank 포인트 획득 기준 설명 문구 2줄
   .desc {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--primary);
     margin-top: -10px;
     margin-bottom: 30px;
     padding-left: 10px;
     line-height: 1.5;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .desc {
+      margin-bottom: 16px;
+    }
   }
 
   // rank 페이지네이션

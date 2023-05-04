@@ -99,9 +99,7 @@
     opacity: 0.8;
 
     &:hover {
-      @media (hover: hover) {
-        opacity: 1;
-      }
+      opacity: 1;
     }
 
     &.active {
@@ -172,10 +170,6 @@
   }
   .miniNav {
     display: flex;
-  }
-  main {
-    margin-left: 0 !important;
-    padding-top: 80px !important;
   }
   .nav.show {
     width: 100%;

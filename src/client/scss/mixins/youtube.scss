@@ -35,8 +35,8 @@
     }
   }
 
-  &:hover .overlay {
-    @media (hover: hover) {
+  @media (hover: hover) {
+    &:hover .overlay {
       opacity: 1;
     }
   }
