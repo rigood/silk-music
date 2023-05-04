@@ -18,6 +18,15 @@
     white-space: nowrap;
   }
 
+  @media screen and (max-width: 1024px) {
+    h2 {
+      font-size: 32px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+  }
+
   // rank 포인트 획득 기준 설명 문구 2줄
   .desc {
     font-size: 16px;
@@ -118,15 +127,6 @@
       }
     }
 
-    @media screen and (max-width: 640px) {
-      .left-col {
-        img {
-          width: 150px;
-          height: 150px;
-        }
-      }
-    }
-
     .right-col {
       padding-top: 5px;
 
@@ -147,13 +147,28 @@
         column-gap: 10px;
 
         button {
-          padding: 8px 16px;
+          padding: 6px 12px;
           border-radius: 5px;
           background-color: var(--primary);
+          font-size: 14px;
           color: var(--text);
           i {
             margin-right: 5px;
           }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .playlist-page {
+      flex-direction: column;
+
+      .left-col {
+        img {
+          width: 100%;
+          height: 100%;
+          margin-bottom: 10px;
         }
       }
     }

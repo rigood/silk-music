@@ -41,33 +41,31 @@
 
 html[data-theme="dark"] {
   --bg: #121212;
+  --primary: #f6c2ce;
   --text: #ffffff;
   --subText: #888888;
+  --player: #4b4b4b;
   --playerBg: #191919;
   --playerBgHover: #222222;
+  --nowPlaying: #3f3f46;
   --youtubeBg: #0f0b0c;
   --modalBg: #222222;
   --modalBgHover: #2a2a2a;
-  --primary: #f6c2ce;
-  --nowPlaying: #3f3f46;
-  --player: #4b4b4b;
-  --playerText: #787878;
   --btnText: #121212;
 }
 
 html[data-theme="light"] {
   --bg: #fdf2f8;
+  --primary: #f43f5e;
   --text: #000000;
   --subText: #4b5563;
+  --player: #b8b8b8;
   --playerBg: #fdf2f8;
   --playerBgHover: #ffe4e6;
+  --nowPlaying: #fddadd;
   --youtubeBg: #121212;
   --modalBg: #ffffff;
   --modalBgHover: #f5f5f5;
-  --primary: #f43f5e;
-  --nowPlaying: #fddadd;
-  --player: #b8b8b8;
-  --playerText: #4b5563;
   --btnText: #ffffff;
 }
 

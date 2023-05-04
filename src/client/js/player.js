@@ -3,6 +3,7 @@ import defaultTracks from "../data/defaultTracks.json";
 
 const APP_KEY = "silk_music";
 const APP_VOLUME = "silk_music_volume";
+const APP_THEME = "silk_music_theme";
 let currentVolume;
 
 // 플레이어 선택
@@ -55,6 +56,11 @@ function formatTime(seconds) {
 // localStorage 데이터 불러오기
 function getLocal() {
   return JSON.parse(localStorage.getItem(APP_KEY));
+}
+
+// localStorage 데이터 불러오기 (테마)
+function getLocalTheme() {
+  return localStorage.getItem(APP_THEME);
 }
 
 // localStorage 데이터 저장하기
@@ -113,8 +119,28 @@ loadTracks();
 function addTrack(track) {
   const li = document.createElement("li");
 
+  const imgWrapper = document.createElement("div");
+  imgWrapper.className = "imgWrapper";
+
   const img = document.createElement("img");
   img.src = track.coverUrl;
+
+  const overlay = document.createElement("div");
+  overlay.className = "overlay";
+
+  const bar1 = document.createElement("span");
+  const bar2 = document.createElement("span");
+  const bar3 = document.createElement("span");
+  const bar4 = document.createElement("span");
+  const bar5 = document.createElement("span");
+  bar1.className = "bar1";
+  bar2.className = "bar2";
+  bar3.className = "bar3";
+  bar4.className = "bar4";
+  bar5.className = "bar5";
+
+  overlay.append(img, bar1, bar2, bar3, bar4, bar5);
+  imgWrapper.append(img, overlay);
 
   const info = document.createElement("div");
   info.className = "info";
@@ -170,7 +196,7 @@ function addTrack(track) {
     li.remove();
   });
 
-  li.append(img, info, i);
+  li.append(imgWrapper, info, i);
 
   li.addEventListener("click", (event) => clickTrack(event, track));
 
@@ -191,10 +217,11 @@ function updateVolume() {
 // randomBtn 업데이트
 function updateRandomBtn() {
   const isRandom = getLocal().config.isRandom;
+  const theme = getLocalTheme();
 
   if (isRandom) {
     randomBtn.setAttribute("data-random", "on");
-    randomBtn.style.color = "#f6c2ce";
+    randomBtn.style.color = theme === "dark" ? "#f6c2ce" : "#f43f5e";
   } else {
     randomBtn.setAttribute("data-random", "off");
     randomBtn.style.color = "#4b4b4b";
@@ -204,6 +231,7 @@ function updateRandomBtn() {
 // repeatBtn 업데이트
 function updateRepeatBtn() {
   const repeat = getLocal().config.repeat;
+  const theme = getLocalTheme();
 
   switch (repeat) {
     case "off":
@@ -214,12 +242,12 @@ function updateRepeatBtn() {
     case "on":
       repeatBtn.setAttribute("data-repeat", "on");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#f6c2ce";
+      repeatBtn.style.color = theme === "dark" ? "#f6c2ce" : "#f43f5e";
       break;
     case "one":
       repeatBtn.setAttribute("data-repeat", "one");
       repeatBtn.className = "fa fa-1";
-      repeatBtn.style.color = "#f6c2ce";
+      repeatBtn.style.color = theme === "dark" ? "#f6c2ce" : "#f43f5e";
       break;
   }
 }
@@ -498,11 +526,12 @@ nextBtn.addEventListener("click", function (event) {
 randomBtn.addEventListener("click", function (event) {
   event.stopPropagation();
   const local = getLocal();
+  const theme = getLocalTheme();
 
   switch (randomBtn.dataset.random) {
     case "off":
       randomBtn.setAttribute("data-random", "on");
-      randomBtn.style.color = "#f6c2ce";
+      randomBtn.style.color = theme === "dark" ? "#f6c2ce" : "#f43f5e";
       local.config.isRandom = true;
       break;
     case "on":
@@ -519,18 +548,19 @@ randomBtn.addEventListener("click", function (event) {
 repeatBtn.addEventListener("click", function (event) {
   event.stopPropagation();
   const local = getLocal();
+  const theme = getLocalTheme();
 
   switch (repeatBtn.dataset.repeat) {
     case "off":
       repeatBtn.setAttribute("data-repeat", "on");
       repeatBtn.className = "fa fa-repeat";
-      repeatBtn.style.color = "#f6c2ce";
+      repeatBtn.style.color = theme === "dark" ? "#f6c2ce" : "#f43f5e";
       local.config.repeat = "on";
       break;
     case "on":
       repeatBtn.setAttribute("data-repeat", "one");
       repeatBtn.className = "fa fa-1";
-      repeatBtn.style.color = "#f6c2ce";
+      repeatBtn.style.color = theme === "dark" ? "#f6c2ce" : "#f43f5e";
       local.config.repeat = "one";
       break;
     case "one":
@@ -545,9 +575,14 @@ repeatBtn.addEventListener("click", function (event) {
 
 // 플레이어 상태
 async function onPlayerStateChange(event, idx) {
+  const data = getLocal();
+  const nowTrackIdx = data.nowTrack.trackIndex;
+  const targetTrack = playlist.querySelectorAll("li")[nowTrackIdx];
+
   // ended
   if (event.data === 0) {
     playBtn.className = "fa fa-play";
+    targetTrack.classList.toggle("nowPlayingBar");
 
     // 조회수 증가
     const youtubeId = event.target.getVideoData().video_id;
@@ -592,11 +627,13 @@ async function onPlayerStateChange(event, idx) {
   // playing
   if (event.data === 1) {
     playBtn.className = "fa fa-pause";
+    targetTrack.classList.toggle("nowPlayingBar");
   }
 
   // paused
   if (event.data === 2) {
     playBtn.className = "fa fa-play";
+    targetTrack.classList.toggle("nowPlayingBar");
   }
 }
 
