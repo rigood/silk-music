@@ -42,8 +42,8 @@
         border-radius: 12px;
         cursor: pointer;
 
-        @media (hover: hover) {
-          &:hover {
+        &:hover {
+          @media (hover: hover) {
             background-color: var(--modalBgHover);
           }
         }

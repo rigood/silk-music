@@ -1,10 +1,10 @@
 @keyframes fadeOut {
-  from {
+  0% {
     transform: none;
     opacity: 1;
   }
-  to {
-    transform: translateY(-60px);
+  100% {
+    transform: translateY(-500px);
     opacity: 0;
   }
 }

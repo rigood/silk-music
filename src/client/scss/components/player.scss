@@ -287,8 +287,8 @@
           padding: 10px 10px 10px 20px;
           cursor: pointer;
 
-          @media (hover: hover) {
-            &:hover {
+          &:hover {
+            @media (hover: hover) {
               background-color: var(--playerBgHover);
             }
           }
@@ -296,10 +296,8 @@
           &.nowPlaying {
             background-color: var(--nowPlaying);
 
-            @media (hover: hover) {
-              &:hover {
-                background-color: var(--nowPlaying);
-              }
+            &:hover {
+              background-color: var(--nowPlaying);
             }
 
             i {
@@ -426,8 +424,8 @@
             cursor: pointer;
           }
 
-          @media (hover: hover) {
-            &:hover i {
+          &:hover i {
+            @media (hover: hover) {
               visibility: visible;
             }
           }
