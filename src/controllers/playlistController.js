@@ -322,3 +322,20 @@ export const postRemoveSongFromPlaylist = async (req, res) => {
 
   return res.json({ ok: true });
 };
+
+export const getPlaylistSongs = async (req, res) => {
+  const { playlistId } = req.params;
+
+  // 플레이리스트 확인
+  const playlist = await Playlist.findById(playlistId).populate("songs");
+
+  if (!playlist) {
+    return res.json({
+      ok: false,
+      errorMsg: "존재하지 않는 플레이리스트입니다.",
+    });
+  }
+
+  // 플레이리스트 내 노래 목록 반환
+  return res.json({ ok: true, songs: playlist.songs });
+};

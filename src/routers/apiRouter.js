@@ -9,6 +9,7 @@ import {
   getAddSongToPlaylist,
   postAddSongToPlaylist,
   postRemoveSongFromPlaylist,
+  getPlaylistSongs,
 } from "../controllers/playlistController";
 import { privateOnlyMiddleware } from "../middlewares";
 
@@ -31,5 +32,7 @@ apiRouter
   .route("/playlist/remove-song")
   .all(privateOnlyMiddleware)
   .post(postRemoveSongFromPlaylist);
+
+apiRouter.route("/playlist/:playlistId([0-9a-f]{24})").get(getPlaylistSongs);
 
 export default apiRouter;

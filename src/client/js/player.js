@@ -696,8 +696,8 @@ if (playAllBtn) {
 async function playAllSongsOnPlaylist(event) {
   event.stopPropagation();
 
-  const id = event.currentTarget.dataset.id;
-  const result = await (await fetch(`/api/playlist/${id}`)).json();
+  const playlistId = event.currentTarget.dataset.id;
+  const result = await (await fetch(`/api/playlist/${playlistId}`)).json();
 
   if (result.ok) {
     let local = getLocal();
@@ -710,8 +710,10 @@ async function playAllSongsOnPlaylist(event) {
 
     const firstTrack = playlist.querySelectorAll("li")[0];
     firstTrack.click();
-  } else {
-    alert("서버 오류로 곡을 재생할 수 없습니다.\n잠시 후 다시 시도해주세요.");
+  }
+
+  if (!result.ok && result.errorMsg) {
+    alert(result.errorMsg);
   }
 }
 
