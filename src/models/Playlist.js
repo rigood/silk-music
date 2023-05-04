@@ -10,9 +10,7 @@ const PlaylistSchema = new mongoose.Schema({
   },
   isDefault: { type: Boolean, default: false },
   createdAt: { type: Date, required: true, default: Date.now },
-  songs: [
-    { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Song" },
-  ],
+  songs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
 });
 
 const Playlist = mongoose.model("Playlist", PlaylistSchema);

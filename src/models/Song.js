@@ -36,9 +36,7 @@ const songSchema = new mongoose.Schema({
     },
   },
   views: { type: Number, required: true, default: 0 },
-  likes: [
-    { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Like" },
-  ],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
 });
 
 const Song = mongoose.model("Song", songSchema);

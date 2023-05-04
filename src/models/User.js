@@ -19,9 +19,7 @@ const userSchema = new mongoose.Schema({
   playlists: [
     { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Playlist" },
   ],
-  likes: [
-    { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Like" },
-  ],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
 });
 
 userSchema.pre("save", async function () {
