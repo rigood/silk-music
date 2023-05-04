@@ -287,15 +287,21 @@
           padding: 10px 10px 10px 20px;
           cursor: pointer;
 
-          &:hover {
-            background-color: var(--playerBgHover);
+          @media (hover: hover) {
+            &:hover {
+              background-color: var(--playerBgHover);
+            }
           }
 
           &.nowPlaying {
             background-color: var(--nowPlaying);
-            &:hover {
-              background-color: var(--nowPlaying);
+
+            @media (hover: hover) {
+              &:hover {
+                background-color: var(--nowPlaying);
+              }
             }
+
             i {
               display: none;
             }
@@ -420,8 +426,10 @@
             cursor: pointer;
           }
 
-          &:hover i {
-            visibility: visible;
+          @media (hover: hover) {
+            &:hover i {
+              visibility: visible;
+            }
           }
         }
       }
@@ -429,7 +437,7 @@
   }
 }
 
-@media (hover: none) and (pointer: coarse) {
+@media (hover: none) {
   #playlist {
     li {
       i {

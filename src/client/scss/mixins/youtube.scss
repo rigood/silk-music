@@ -35,7 +35,9 @@
     }
   }
 
-  &:hover .overlay {
-    opacity: 1;
+  @media (hover: hover) {
+    &:hover .overlay {
+      opacity: 1;
+    }
   }
 }

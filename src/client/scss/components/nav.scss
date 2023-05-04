@@ -97,15 +97,19 @@
     padding: 5px 0;
 
     opacity: 0.8;
-    &:hover {
-      opacity: 1;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 1;
+      }
     }
 
     &.active {
       opacity: 1;
       color: var(--primary);
-      &:hover {
-        opacity: 1;
+      @media (hover: hover) {
+        &:hover {
+          opacity: 1;
+        }
       }
     }
 
@@ -157,6 +161,8 @@
   top: 15px;
   left: 15px;
   z-index: 9997;
+  color: var(--primary);
+  opacity: 0.5;
   cursor: pointer;
 }
 

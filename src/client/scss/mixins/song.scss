@@ -4,10 +4,11 @@
   align-items: center;
   padding: 15px 0;
 
-  &:hover {
-    background-color: var(--playerBgHover);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--playerBgHover);
+    }
   }
-
   .rank {
     font-weight: bold;
     text-align: center;
@@ -44,8 +45,10 @@
       }
     }
 
-    &:hover .overlay {
-      opacity: 1;
+    @media (hover: hover) {
+      &:hover .overlay {
+        opacity: 1;
+      }
     }
   }
 
@@ -169,8 +172,10 @@
       }
     }
 
-    &:hover .overlay {
-      opacity: 1;
+    @media (hover: hover) {
+      &:hover .overlay {
+        opacity: 1;
+      }
     }
   }
 
@@ -217,9 +222,11 @@
     color: var(--primary);
   }
 
-  &:hover .play i,
-  &:hover .add i,
-  &:hover .like i {
-    visibility: visible;
+  @media (hover: hover) {
+    &:hover .play i,
+    &:hover .add i,
+    &:hover .like i {
+      visibility: visible;
+    }
   }
 }
