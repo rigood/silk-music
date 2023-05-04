@@ -582,7 +582,7 @@ async function onPlayerStateChange(event, idx) {
   // ended
   if (event.data === 0) {
     playBtn.className = "fa fa-play";
-    targetTrack.classList.toggle("nowPlayingBar");
+    targetTrack.classList.remove("nowPlayingBar");
 
     // 조회수 증가
     const youtubeId = event.target.getVideoData().video_id;
@@ -627,13 +627,13 @@ async function onPlayerStateChange(event, idx) {
   // playing
   if (event.data === 1) {
     playBtn.className = "fa fa-pause";
-    targetTrack.classList.toggle("nowPlayingBar");
+    targetTrack.classList.add("nowPlayingBar");
   }
 
   // paused
   if (event.data === 2) {
     playBtn.className = "fa fa-play";
-    targetTrack.classList.toggle("nowPlayingBar");
+    targetTrack.classList.remove("nowPlayingBar");
   }
 }
 
