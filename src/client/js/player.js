@@ -44,6 +44,16 @@ const bar3 = controller.querySelector("#bar3");
 const screenToggleBtn = screen.querySelector("#screenToggleBtn");
 const playlist = screen.querySelector("#playlist");
 
+// 플레이어 스크린 열고 닫기
+function toggleScreen() {
+  screen.classList.toggle("show");
+  bar1.classList.toggle("show");
+  bar2.classList.toggle("show");
+  bar3.classList.toggle("show");
+  document.body.classList.toggle("scrollHide");
+}
+player.addEventListener("click", toggleScreen);
+
 // 시간 변환
 function formatTime(seconds) {
   if (seconds < 3600) {
@@ -70,12 +80,12 @@ function setLocal(data) {
 
 // 노래 불러오기
 function loadTracks() {
-  let config, nowTrack, tracks;
   const local = getLocal();
+  let config, nowTrack, tracks;
 
   if (local) {
+    nowTrack = local.nowTrack;
     tracks = local.tracks;
-    const nowTrack = local.nowTrack;
 
     cover.src = nowTrack.targetTrack.coverUrl;
     title.innerText = nowTrack.targetTrack.title;
@@ -119,6 +129,7 @@ loadTracks();
 function addTrack(track) {
   const li = document.createElement("li");
 
+  // 1. imgWrapper
   const imgWrapper = document.createElement("div");
   imgWrapper.className = "imgWrapper";
 
@@ -139,9 +150,10 @@ function addTrack(track) {
   bar4.className = "bar4";
   bar5.className = "bar5";
 
-  overlay.append(img, bar1, bar2, bar3, bar4, bar5);
+  overlay.append(bar1, bar2, bar3, bar4, bar5);
   imgWrapper.append(img, overlay);
 
+  // 2. info
   const info = document.createElement("div");
   info.className = "info";
 
@@ -155,6 +167,7 @@ function addTrack(track) {
 
   info.append(title, artist);
 
+  // 3. i
   const i = document.createElement("i");
   i.className = "fa fa-xmark";
   i.addEventListener("click", function (event) {
@@ -252,37 +265,27 @@ function updateRepeatBtn() {
   }
 }
 
-// 플레이어 스크린 열고 닫기
-function toggleScreen() {
-  screen.classList.toggle("show");
-  bar1.classList.toggle("show");
-  bar2.classList.toggle("show");
-  bar3.classList.toggle("show");
-  document.body.classList.toggle("scrollHide");
-}
-player.addEventListener("click", toggleScreen);
-
 // 노래 클릭
 function clickTrack(event, track) {
   event.stopPropagation();
 
   const localTracks = getLocal().tracks;
 
-  let currentIdx;
+  let trackIndex;
   localTracks.map((localTrack, index) =>
-    localTrack._id === track._id ? (currentIdx = index) : null
+    localTrack._id === track._id ? (trackIndex = index) : null
   );
 
-  playTrack(track, currentIdx);
+  playTrack(track, trackIndex);
 }
 
 // 노래 재생
-function playTrack(track, idx) {
-  let data = getLocal();
+function playTrack(track, trackIndex) {
   const nowTrack = {
     targetTrack: track,
-    trackIndex: idx,
+    trackIndex: trackIndex,
   };
+  let data = getLocal();
   data.nowTrack = nowTrack;
 
   setLocal(data);
@@ -308,7 +311,7 @@ function playTrack(track, idx) {
     playerVars: { controls: 0 },
     events: {
       onReady: onPlayerReady,
-      onStateChange: (event) => onPlayerStateChange(event, idx),
+      onStateChange: (event) => onPlayerStateChange(event, trackIndex),
     },
   });
 }
@@ -321,10 +324,10 @@ function onPlayerReady(event) {
   // control 업데이트
   playBtn.className = "fa fa-pause";
 
+  // time, progress 업데이트
   let time_update_interval;
   clearInterval(time_update_interval);
 
-  // time, progress 업데이트
   updateTimerDisplay();
   updateProgressBar();
 
